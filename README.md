@@ -1,4 +1,5 @@
 # Murder Mystery Helper
+
 A fabric mod for Hypixels Murder Mystery that does the detective work for you.
 
 When playing on that server it will identify the murders by them equipping their murder weapon.
