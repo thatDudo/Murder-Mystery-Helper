@@ -30,6 +30,6 @@
   "config.generic.hypixel.murder_mystery.murder_mode.tooltip": "Highlights all players you need to kill",
   "config.generic.hypixel.murder_mystery.show_name_tags.title": "Show name tags",
   "config.generic.hypixel.murder_mystery.show_name_tags.tooltip": "Forces the client to render name tags",
-  "config.generic.hypixel.murder_mystery.hide_death_banner.title": "",
-  "config.generic.hypixel.murder_mystery.hide_death_banner.tooltip": ""
+  "config.generic.hypixel.murder_mystery.hide_death_banner.title": "Hide death banner",
+  "config.generic.hypixel.murder_mystery.hide_death_banner.tooltip": "Hides the banner bestowed on you upon death"
 }

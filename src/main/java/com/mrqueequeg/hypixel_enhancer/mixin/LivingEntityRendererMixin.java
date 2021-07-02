@@ -2,15 +2,11 @@ package com.mrqueequeg.hypixel_enhancer.mixin;
 
 import com.mrqueequeg.hypixel_enhancer.config.Config;
 import com.mrqueequeg.hypixel_enhancer.config.ConfigManager;
-import com.mrqueequeg.hypixel_enhancer.debug.Logger;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
-import net.minecraft.client.render.entity.PlayerEntityRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

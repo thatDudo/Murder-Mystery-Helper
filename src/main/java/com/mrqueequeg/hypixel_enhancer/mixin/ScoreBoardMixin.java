@@ -1,14 +1,11 @@
 package com.mrqueequeg.hypixel_enhancer.mixin;
 
-import com.mrqueequeg.hypixel_enhancer.HypixelEnhancer;
 import com.mrqueequeg.hypixel_enhancer.config.Config;
 import com.mrqueequeg.hypixel_enhancer.config.ConfigManager;
-import com.mrqueequeg.hypixel_enhancer.debug.Logger;
 import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.scoreboard.ScoreboardCriterion;
 import net.minecraft.scoreboard.ScoreboardObjective;
 import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

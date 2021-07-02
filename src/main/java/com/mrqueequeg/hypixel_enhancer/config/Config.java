@@ -2,7 +2,6 @@ package com.mrqueequeg.hypixel_enhancer.config;
 
 import com.google.gson.annotations.Expose;
 import net.minecraft.item.*;
-import net.minecraft.text.TranslatableText;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,16 +1,10 @@
 package com.mrqueequeg.hypixel_enhancer.mixin;
 
-import com.mrqueequeg.hypixel_enhancer.HypixelEnhancer;
 import com.mrqueequeg.hypixel_enhancer.config.Config;
 import com.mrqueequeg.hypixel_enhancer.config.ConfigManager;
 import com.mrqueequeg.hypixel_enhancer.debug.Logger;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.item.PotionItem;
-import net.minecraft.potion.PotionUtil;
-import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import org.spongepowered.asm.mixin.Mixin;

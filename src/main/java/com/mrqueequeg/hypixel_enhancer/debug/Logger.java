@@ -1,7 +1,6 @@
 package com.mrqueequeg.hypixel_enhancer.debug;
 
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 
 public class Logger {
