@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "hypixel_enhancer",
+  "version": "${version}",
+
+  "name": "Murder Mystery Mod",
+  "description": "This mod contains various tools for Hypixels Murder Mystery",
+  "authors": [
+    "MrQueequeg"
+  ],
+  "contact": {
+    "homepage": "",
+    "sources": ""
+  },
+
+  "license": "CC0-1.0",
+
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.mrqueequeg.hypixel_enhancer.HypixelEnhancer"
+    ],
+    "modmenu": [
+      "com.mrqueequeg.hypixel_enhancer.plugin.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "hypixel_enhancer.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "fabric": "*",
+    "minecraft": "1.16.x"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
