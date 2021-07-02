@@ -7,8 +7,10 @@ import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
@@ -19,8 +21,8 @@ public class HypixelEnhancer implements ClientModInitializer {
 	private static KeyBinding keyToggleEnabled;
 
 	public static final String MOD_ID = "hypixel_enhancer";
-	public static final String MOD_NAME = "Murder Mystery Mod";
-	public static final String CHAT_TAG = "[Murder Mystery Mod] ";
+	public static final String MOD_NAME = "Murder Mystery Helper";
+	public static final String CHAT_TAG = "[Murder Mystery Helper] ";
 
 	@Override
 	public void onInitializeClient() {
@@ -62,10 +64,23 @@ public class HypixelEnhancer implements ClientModInitializer {
 		}
 	}
 
-	@Deprecated
 	public static void printChatMsg(Text msg) {
 		if (MinecraftClient.getInstance() != null && MinecraftClient.getInstance().player != null) {
-			MinecraftClient.getInstance().player.sendMessage(msg, false);
+			MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(msg);
 		}
+	}
+
+	public static boolean isRealPlayer(PlayerEntity player) {
+		// ids of players are sometimes different from this player list
+		//return MinecraftClient.getInstance().player.networkHandler.getPlayerUuids().contains(player.getGameProfile().getId());
+		// using names
+		if (MinecraftClient.getInstance().player != null) {
+			for (PlayerListEntry entry : MinecraftClient.getInstance().player.networkHandler.getPlayerList()) {
+				if (entry.getProfile().getName().equals(player.getGameProfile().getName())) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }

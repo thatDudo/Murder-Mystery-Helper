@@ -1,11 +1,12 @@
 package com.mrqueequeg.hypixel_enhancer.config;
 
 import com.google.gson.annotations.Expose;
+import com.mrqueequeg.hypixel_enhancer.access.PlayerEntityMixinAccess;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.UUID;
 
 public class Config {
     // Values that will be saved in json are marked with @Expose
@@ -32,7 +33,7 @@ public class Config {
         }
 
         public static boolean isMurder = false;
-        public static ArrayList<UUID> markedMurders = new ArrayList<>();
+        public static ArrayList<PlayerEntity> markedMurders = new ArrayList<>();
 
         public static final ArrayList<Item> MURDER_ITEMS = new ArrayList<>(Arrays.asList(
                 Items.STICK, Items.DEAD_BUSH, Items.CARROT, Items.GOLDEN_CARROT, Items.NAME_TAG, Items.GOLDEN_PICKAXE,
@@ -42,7 +43,10 @@ public class Config {
                 Items.CARROT_ON_A_STICK
         ));
         public static void resetMarkedPlayers() {
-            markedMurders = new ArrayList<>();
+            for (PlayerEntity entity : markedMurders) {
+                ((PlayerEntityMixinAccess)entity).resetMurderState();
+            }
+            markedMurders.clear();
         }
         public static void reset() {
             isMurder = false;

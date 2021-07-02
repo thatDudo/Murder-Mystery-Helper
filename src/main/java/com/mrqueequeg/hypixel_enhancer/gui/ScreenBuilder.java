@@ -35,8 +35,8 @@ public class ScreenBuilder {
                 .setSaveConsumer(n -> config.enabled = n)
                 .build();
 
-        // glow marking
-        AbstractConfigListEntry<Boolean> toggleMurderMysteryInnocentMode = entryBuilder.startBooleanToggle(new TranslatableText("config.generic.hypixel.murder_mystery.innocent_mode^.title"), config.murdermystery.innocentMode)
+        // innocent mode
+        AbstractConfigListEntry<Boolean> toggleMurderMysteryInnocentMode = entryBuilder.startBooleanToggle(new TranslatableText("config.generic.hypixel.murder_mystery.innocent_mode.title"), config.murdermystery.innocentMode)
                 .setDefaultValue(defaults.murdermystery.innocentMode)
                 .setTooltip(new TranslatableText("config.generic.hypixel.murder_mystery.innocent_mode.tooltip"))
                 .setSaveConsumer(n -> config.murdermystery.innocentMode = n)

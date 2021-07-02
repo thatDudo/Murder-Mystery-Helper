@@ -1,5 +1,6 @@
 package com.mrqueequeg.hypixel_enhancer.mixin;
 
+import com.mrqueequeg.hypixel_enhancer.HypixelEnhancer;
 import com.mrqueequeg.hypixel_enhancer.config.Config;
 import com.mrqueequeg.hypixel_enhancer.config.ConfigManager;
 import com.mrqueequeg.hypixel_enhancer.debug.Logger;
@@ -23,7 +24,7 @@ public class PlayerInventoryMixin {
                 // If player gets murder item set isMurder to true
                 if (stack.hasCustomName()) {
                     if (stack.getName().getString().equals("Knife")) {
-                        Logger.sendMessage(new TranslatableText("message.murder_mystery.starting_murder_mode").formatted(Formatting.RED), true);
+                        HypixelEnhancer.printChatMsg(new TranslatableText("message.murder_mystery.starting_murder_mode").formatted(Formatting.RED));
                         Config.MurderMystery.isMurder = true;
                     }
                 }
