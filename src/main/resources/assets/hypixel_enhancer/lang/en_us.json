@@ -1,0 +1,35 @@
+{
+  "title": "Murder Mystery Mod",
+  "config.title": "Murder Mystery Mod",
+
+  "message.enabled": "%s enabled",
+  "message.disabled": "%s disabled",
+  "message.murder_mystery.murder_marked": "Found Murder: %s",
+  "message.murder_mystery.starting_murder_mode": "Murder Mode: ACTIVATED",
+
+  "key.category.hypixel_enhancer": "Murder Mystery Mod",
+  "key.hypixel_enhancer.settings": "Open Settings",
+  "key.hypixel_enhancer.enable": "Toggle Enabled",
+
+  "config.generic.title": "Generic",
+  "config.generic.enabled.title": "Enabled",
+  "config.generic.enabled.tooltip": "Toggle to enable/disable this mod",
+
+  "config.generic.hypixel.title": "Hypixel",
+  "config.generic.hypixel.tooltip": "A section dedicated to hypixel minigames",
+
+  "config.generic.hypixel.section.enabled.title": "Enabled",
+  "config.generic.hypixel.section.enabled.tooltip": "Toggle to enable/disable this section",
+  "config.generic.hypixel.section.show_bow_trajectory.title": "Show bow trajectory",
+  "config.generic.hypixel.section.show_bow_trajectory.tooltip": "Renders a line showing the trajectory of the bow",
+
+  "config.generic.hypixel.murder_mystery.title": "Murder Mystery",
+  "config.generic.hypixel.murder_mystery.innocent_mode.title": "Innocent Mode",
+  "config.generic.hypixel.murder_mystery.innocent_mode.tooltip": "Highlights all detected murders.\nThe detection fires when they equip a murder item.",
+  "config.generic.hypixel.murder_mystery.murder_mode.title": "Murder Mode",
+  "config.generic.hypixel.murder_mystery.murder_mode.tooltip": "Highlights all players you need to kill",
+  "config.generic.hypixel.murder_mystery.show_name_tags.title": "Show name tags",
+  "config.generic.hypixel.murder_mystery.show_name_tags.tooltip": "Forces the client to render name tags",
+  "config.generic.hypixel.murder_mystery.hide_death_banner.title": "",
+  "config.generic.hypixel.murder_mystery.hide_death_banner.tooltip": ""
+}
