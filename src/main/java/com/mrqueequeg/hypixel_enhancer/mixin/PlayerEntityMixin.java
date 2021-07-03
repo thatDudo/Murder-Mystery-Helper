@@ -34,6 +34,13 @@ public abstract class PlayerEntityMixin implements PlayerEntityMixinAccess {
         _isMurder = false;
     }
 
+    @Inject(at = @At("RETURN"), method = "<init>")
+    private void onInit(World world, BlockPos pos, float yaw, GameProfile profile, CallbackInfo info) {
+        if (ConfigManager.getConfig().enabled) {
+            _isMurder = Config.MurderMystery.markedMurders.contains(profile.getId());
+        }
+    }
+
     @Inject(at = @At("RETURN"), method = "getEquippedStack")
     private void onEquip(EquipmentSlot slot, CallbackInfoReturnable<ItemStack> info) {
         if (ConfigManager.getConfig().enabled) {
@@ -43,7 +50,7 @@ public abstract class PlayerEntityMixin implements PlayerEntityMixinAccess {
                     if (Config.MurderMystery.isMurderItem(info.getReturnValue().getItem())) {
                         HypixelEnhancer.printChatMsg(new TranslatableText("message.murder_mystery.murder_marked", Formatting.RED+((PlayerEntity)(Object)this).getGameProfile().getName()));
                         _isMurder = true;
-                        Config.MurderMystery.markedMurders.add((PlayerEntity)(Object)this);
+                        Config.MurderMystery.markedMurders.add(((PlayerEntity)(Object)this).getGameProfile().getId());
                     }
                 }
             }
