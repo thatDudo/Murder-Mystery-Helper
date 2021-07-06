@@ -1,6 +1,5 @@
 package com.mrqueequeg.hypixel_enhancer.mixin;
 
-import com.mrqueequeg.hypixel_enhancer.HypixelEnhancer;
 import com.mrqueequeg.hypixel_enhancer.access.PlayerEntityMixinAccess;
 import com.mrqueequeg.hypixel_enhancer.config.Config;
 import com.mrqueequeg.hypixel_enhancer.config.ConfigManager;
@@ -36,9 +35,9 @@ public class MinecraftClientMixin {
             Config config = ConfigManager.getConfig();
             if (config.murdermystery.isEnabled()) {
                 if (entity instanceof PlayerEntity && !entity.isSpectator() && !(entity instanceof ClientPlayerEntity)) {
-                    if (((Config.MurderMystery.isMurder && config.murdermystery.murderMode)
-                            || (((PlayerEntityMixinAccess)entity).isMurder() && config.murdermystery.innocentMode))) {
-                        if (HypixelEnhancer.isRealPlayer((PlayerEntity)entity)) {
+                    if (((Config.MurderMystery.clientIsMurder && config.murdermystery.murderHelp)
+                            || (((PlayerEntityMixinAccess)entity).isMurder() && config.murdermystery.innocentHelp))) {
+                        if (((PlayerEntityMixinAccess)entity).isRealPlayer()) {
                             info.setReturnValue(true);
                         }
                     }

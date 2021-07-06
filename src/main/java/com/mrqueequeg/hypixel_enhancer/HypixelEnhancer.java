@@ -1,5 +1,7 @@
 package com.mrqueequeg.hypixel_enhancer;
 
+import com.mojang.authlib.GameProfile;
+import com.mrqueequeg.hypixel_enhancer.config.Config;
 import com.mrqueequeg.hypixel_enhancer.config.ConfigManager;
 import com.mrqueequeg.hypixel_enhancer.debug.Logger;
 import com.mrqueequeg.hypixel_enhancer.gui.ScreenBuilder;
@@ -15,6 +17,8 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import org.lwjgl.glfw.GLFW;
+
+import java.util.ArrayList;
 
 public class HypixelEnhancer implements ClientModInitializer {
 	private static KeyBinding keyBindingOpenSettings;
@@ -64,19 +68,32 @@ public class HypixelEnhancer implements ClientModInitializer {
 		}
 	}
 
+	public static void setModEnabled(boolean state) {
+		Config config = ConfigManager.getConfig();
+		if (state != config.enabled) {
+			config.enabled = state;
+		}
+	}
+
 	public static void printChatMsg(Text msg) {
 		if (MinecraftClient.getInstance() != null && MinecraftClient.getInstance().player != null) {
 			MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(msg);
 		}
 	}
 
-	public static boolean isRealPlayer(PlayerEntity player) {
+	public static boolean isPlayerInTabList(PlayerEntity player) {
+		return isPlayerInTabList(player.getGameProfile());
+	}
+
+	public static boolean isPlayerInTabList(GameProfile profile) {
 		// ids of players are sometimes different from this player list
-		//return MinecraftClient.getInstance().player.networkHandler.getPlayerUuids().contains(player.getGameProfile().getId());
-		// using names
+		// DOESN'T WORK: return MinecraftClient.getInstance().player.networkHandler.getPlayerUuids().contains(player.getGameProfile().getId());
+
+		// but using names works:
 		if (MinecraftClient.getInstance().player != null) {
+			String name = profile.getName();
 			for (PlayerListEntry entry : MinecraftClient.getInstance().player.networkHandler.getPlayerList()) {
-				if (entry.getProfile().getName().equals(player.getGameProfile().getName())) {
+				if (entry.getProfile().getName().equals(name)) {
 					return true;
 				}
 			}

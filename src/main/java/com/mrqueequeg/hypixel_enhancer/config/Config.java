@@ -1,7 +1,6 @@
 package com.mrqueequeg.hypixel_enhancer.config;
 
 import com.google.gson.annotations.Expose;
-import com.mrqueequeg.hypixel_enhancer.access.PlayerEntityMixinAccess;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
 
@@ -18,22 +17,22 @@ public class Config {
     @Expose public MurderMystery murdermystery = new MurderMystery();
 
     public static boolean onHypixelServer = false;
-    public static HypixelLobbies activeMiniGame = HypixelLobbies.None;
+    public static HypixelLobbies currentLobby = HypixelLobbies.None;
 
     public static final class MurderMystery {
-        @Expose public boolean murderMode = true;
-        @Expose public boolean innocentMode = true;
+        @Expose public boolean murderHelp = true;
+        @Expose public boolean innocentHelp = true;
         @Expose public boolean showNameTags = false;
 
         public boolean isEnabled() {
-            return activeMiniGame == HypixelLobbies.MurderMystery;
+            return currentLobby == HypixelLobbies.MurderMystery;
         }
 
         public boolean validate() {
             return true;
         }
 
-        public static boolean isMurder = false;
+        public static boolean clientIsMurder = false;
         public static ArrayList<UUID> markedMurders = new ArrayList<>();
 
         public static final ArrayList<Item> MURDER_ITEMS = new ArrayList<>(Arrays.asList(
@@ -47,7 +46,7 @@ public class Config {
             markedMurders.clear();
         }
         public static void reset() {
-            isMurder = false;
+            clientIsMurder = false;
             resetMarkedPlayers();
         }
         public static boolean isMurderItem(Item item) {
@@ -71,7 +70,7 @@ public class Config {
         if (lobby == HypixelLobbies.MurderMystery) {
             MurderMystery.reset();
         }
-        activeMiniGame = HypixelLobbies.None;
+        currentLobby = HypixelLobbies.None;
     }
 
     /**

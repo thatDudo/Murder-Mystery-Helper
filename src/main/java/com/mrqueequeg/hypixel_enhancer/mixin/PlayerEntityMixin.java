@@ -23,6 +23,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class PlayerEntityMixin implements PlayerEntityMixinAccess {
 
     private boolean _isMurder = false;
+    private boolean _isRealPlayer = false;
 
     @Override
     public boolean isMurder() {
@@ -30,8 +31,8 @@ public abstract class PlayerEntityMixin implements PlayerEntityMixinAccess {
     }
 
     @Override
-    public void resetMurderState() {
-        _isMurder = false;
+    public boolean isRealPlayer() {
+        return _isRealPlayer;
     }
 
     @Inject(at = @At("RETURN"), method = "<init>")
@@ -41,12 +42,22 @@ public abstract class PlayerEntityMixin implements PlayerEntityMixinAccess {
         }
     }
 
+    @Inject(at = @At("RETURN"), method = "tick")
+    private void onTick(CallbackInfo info) {
+        if (ConfigManager.getConfig().enabled) {
+            PlayerEntity player = (PlayerEntity)(Object)this;
+            // The player tab list changes now and then which is why is has to be checked regularly
+            _isRealPlayer = !player.isSleeping() && !(player instanceof ClientPlayerEntity) && !player.isCreative() && HypixelEnhancer.isPlayerInTabList(player);
+        }
+    }
+
     @Inject(at = @At("RETURN"), method = "getEquippedStack")
     private void onEquip(EquipmentSlot slot, CallbackInfoReturnable<ItemStack> info) {
         if (ConfigManager.getConfig().enabled) {
             Config config = ConfigManager.getConfig();
-            if (config.murdermystery.isEnabled() && !Config.MurderMystery.isMurder) {
-                if (!(((Object)this) instanceof ClientPlayerEntity) && !_isMurder) {
+            if (config.murdermystery.isEnabled() && !Config.MurderMystery.clientIsMurder) {
+                PlayerEntity player = (PlayerEntity)(Object)this;
+                if (!_isMurder && !(player instanceof ClientPlayerEntity) && !player.isSpectator()) {
                     if (Config.MurderMystery.isMurderItem(info.getReturnValue().getItem())) {
                         HypixelEnhancer.printChatMsg(new TranslatableText("message.murder_mystery.murder_marked", Formatting.RED+((PlayerEntity)(Object)this).getGameProfile().getName()));
                         _isMurder = true;

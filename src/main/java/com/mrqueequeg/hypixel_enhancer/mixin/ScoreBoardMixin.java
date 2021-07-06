@@ -22,11 +22,11 @@ public class ScoreBoardMixin {
             //Logger.sendChatMessage(Text.of(Formatting.GREEN+name+": "+displayNameString));
             if (displayNameString.equalsIgnoreCase("murder mystery")) {
                 if (name.equalsIgnoreCase("prescoreboard") || name.equalsIgnoreCase("mmlobby")) {
-                    Config.activeMiniGame = Config.HypixelLobbies.MurderMysteryLobby;
+                    Config.currentLobby = Config.HypixelLobbies.MurderMysteryLobby;
                 }
-                else if (Config.activeMiniGame != Config.HypixelLobbies.MurderMystery && name.equalsIgnoreCase("murdermystery")) {
+                else if (Config.currentLobby != Config.HypixelLobbies.MurderMystery && name.equalsIgnoreCase("murdermystery")) {
                     Config.reset(Config.HypixelLobbies.MurderMystery);
-                    Config.activeMiniGame = Config.HypixelLobbies.MurderMystery;
+                    Config.currentLobby = Config.HypixelLobbies.MurderMystery;
                 }
             }
         }

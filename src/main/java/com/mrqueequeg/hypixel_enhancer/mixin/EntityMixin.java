@@ -3,9 +3,6 @@ package com.mrqueequeg.hypixel_enhancer.mixin;
 import com.mrqueequeg.hypixel_enhancer.access.PlayerEntityMixinAccess;
 import com.mrqueequeg.hypixel_enhancer.config.Config;
 import com.mrqueequeg.hypixel_enhancer.config.ConfigManager;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,7 +17,7 @@ public abstract class EntityMixin {
     private void onGetTeamColorValue(CallbackInfoReturnable<Integer> info) {
         if (ConfigManager.getConfig().enabled) {
             Config config = ConfigManager.getConfig();
-            if (config.murdermystery.isEnabled() && config.murdermystery.innocentMode) {
+            if (config.murdermystery.isEnabled() && config.murdermystery.innocentHelp) {
                 Object t = (Object) this;
                 if (t instanceof PlayerEntity && ((PlayerEntityMixinAccess)t).isMurder()) {
                     info.setReturnValue(0xFF1111);
