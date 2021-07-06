@@ -26,6 +26,36 @@ public class Config {
         @Expose public boolean highlightItems = false;
         @Expose public boolean highlightDetectives = false;
 
+        public void setMurderHelp(boolean state) {
+            if (murderHelp != state) {
+                if (!state) {
+                    markedMurders.clear();
+                }
+                murderHelp = state;
+            }
+        }
+
+        public void setInnocentHelp(boolean state) {
+            innocentHelp = state;
+        }
+
+        public void setShowNameTags(boolean state) {
+            showNameTags = state;
+        }
+
+        public void setHighlightItems(boolean state) {
+            highlightItems = state;
+        }
+
+        public void setHighlightDetectives(boolean state) {
+            if (highlightDetectives != state) {
+                if (!state) {
+                    markedDetectives.clear();
+                }
+                highlightDetectives = state;
+            }
+        }
+
         public boolean validate() {
             return true;
         }

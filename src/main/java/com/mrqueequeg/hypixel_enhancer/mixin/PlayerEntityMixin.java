@@ -69,7 +69,7 @@ public abstract class PlayerEntityMixin implements PlayerEntityMixinAccess {
                         Config.MurderMystery.markedDetectives.add(((PlayerEntity)(Object)this).getGameProfile().getId());
                     }
                     else if (Config.MurderMystery.isMurderItem(holdItem)) {
-                        HypixelEnhancer.printChatMsg(new TranslatableText("message.murder_mystery.murder_marked", Formatting.RED+((PlayerEntity)(Object)this).getGameProfile().getName()));
+//                        HypixelEnhancer.printChatMsg(new TranslatableText("message.murder_mystery.murder_marked", Formatting.RED+((PlayerEntity)(Object)this).getGameProfile().getName()));
                         _isMurder = true;
                         Config.MurderMystery.markedMurders.add(((PlayerEntity)(Object)this).getGameProfile().getId());
                     }
