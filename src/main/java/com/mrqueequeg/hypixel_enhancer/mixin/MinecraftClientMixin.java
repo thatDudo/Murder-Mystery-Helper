@@ -4,11 +4,14 @@ import com.mrqueequeg.hypixel_enhancer.access.PlayerEntityMixinAccess;
 import com.mrqueequeg.hypixel_enhancer.config.Config;
 import com.mrqueequeg.hypixel_enhancer.config.ConfigManager;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.network.ServerInfo;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -33,11 +36,27 @@ public class MinecraftClientMixin {
     private void onHasOutline(Entity entity, CallbackInfoReturnable<Boolean> info) {
         if (ConfigManager.getConfig().enabled) {
             Config config = ConfigManager.getConfig();
-            if (config.murdermystery.isEnabled()) {
-                if (entity instanceof PlayerEntity && !entity.isSpectator() && !(entity instanceof ClientPlayerEntity)) {
-                    if (((Config.MurderMystery.clientIsMurder && config.murdermystery.murderHelp)
-                            || (((PlayerEntityMixinAccess)entity).isMurder() && config.murdermystery.innocentHelp))) {
-                        if (((PlayerEntityMixinAccess)entity).isRealPlayer()) {
+            if (Config.MurderMystery.isActive()) {
+                if (entity instanceof PlayerEntity && ((PlayerEntityMixinAccess)entity).isRealPlayer()) {
+                    if ((config.murdermystery.murderHelp && Config.MurderMystery.clientIsMurder)
+                            || (config.murdermystery.innocentHelp && ((PlayerEntityMixinAccess)entity).isMurder())
+                            || (config.murdermystery.highlightDetectives && ((PlayerEntityMixinAccess)entity).hasBow())) {
+                        info.setReturnValue(true);
+                    }
+                }
+                else if (config.murdermystery.highlightItems) {
+                    if (entity instanceof ArmorStandEntity armorStandEntity) {
+                        if (armorStandEntity.isInvisible()&&!armorStandEntity.isAttackable()&&!armorStandEntity.isSmall()&&!armorStandEntity.shouldHideBasePlate()) {
+                            for (ItemStack heldItem : armorStandEntity.getItemsHand()) {
+                                if (heldItem.getItem() == Items.BOW) {
+                                    info.setReturnValue(true);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    else if (entity instanceof ItemEntity) {
+                        if (((ItemEntity)entity).getStack().getItem() == Items.GOLD_INGOT) {
                             info.setReturnValue(true);
                         }
                     }

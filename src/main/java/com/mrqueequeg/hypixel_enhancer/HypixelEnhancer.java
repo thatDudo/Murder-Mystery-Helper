@@ -33,7 +33,7 @@ public class HypixelEnhancer implements ClientModInitializer {
 		Logger.init();
 		ConfigManager.init();
 
-		// adding keybinding to settings
+		// adding keybindings to minecraft settings
 		keyBindingOpenSettings = KeyBindingHelper.registerKeyBinding(new KeyBinding(
 				"key."+MOD_ID+".settings", // The translation key of the keybinding's name
 				InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
@@ -54,7 +54,6 @@ public class HypixelEnhancer implements ClientModInitializer {
 			ScreenBuilder.openConfigScreen(client);
 		}
 		else if (keyToggleEnabled.wasPressed()) {
-			//client.inGameHud.getChatHud().addMessage(new TranslatableText(""));
 			if (client.player != null) {
 				if (ConfigManager.getConfig().enabled) {
 					ConfigManager.getConfig().enabled = false;
@@ -76,7 +75,7 @@ public class HypixelEnhancer implements ClientModInitializer {
 	}
 
 	public static void printChatMsg(Text msg) {
-		if (MinecraftClient.getInstance() != null && MinecraftClient.getInstance().player != null) {
+		if (MinecraftClient.getInstance() != null && MinecraftClient.getInstance().inGameHud != null) {
 			MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(msg);
 		}
 	}

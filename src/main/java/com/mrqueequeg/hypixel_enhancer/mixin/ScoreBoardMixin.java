@@ -16,8 +16,8 @@ public class ScoreBoardMixin {
 
     @Inject(at = @At("HEAD"), method = "addObjective")
     private void onAddObjective(String name, ScoreboardCriterion criterion2, Text displayName, ScoreboardCriterion.RenderType renderType, CallbackInfoReturnable<ScoreboardObjective> info) {
+        // Used for detecting active mini-game
         if (ConfigManager.getConfig().enabled && Config.onHypixelServer) {
-            // Used for detecting active mini-game
             String displayNameString = displayName.getString();
             //Logger.sendChatMessage(Text.of(Formatting.GREEN+name+": "+displayNameString));
             if (displayNameString.equalsIgnoreCase("murder mystery")) {

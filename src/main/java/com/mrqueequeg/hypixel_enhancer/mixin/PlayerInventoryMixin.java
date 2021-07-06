@@ -19,7 +19,7 @@ public class PlayerInventoryMixin {
     private void onSetStack(int slot, ItemStack stack, CallbackInfo info) {
         if (ConfigManager.getConfig().enabled) {
             Config config = ConfigManager.getConfig();
-            if (config.murdermystery.isEnabled() && !Config.MurderMystery.clientIsMurder) {
+            if (config.murdermystery.isActive() && !Config.MurderMystery.clientIsMurder) {
                 // If player gets murder item set isMurder to true
                 if (stack.hasCustomName()) {
                     if (stack.getName().getString().equals("Knife")) {

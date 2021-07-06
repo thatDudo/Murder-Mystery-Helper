@@ -4,4 +4,5 @@ public interface PlayerEntityMixinAccess {
 
     boolean isMurder();
     boolean isRealPlayer();
+    boolean hasBow();
 }

@@ -5,7 +5,6 @@ import com.mrqueequeg.hypixel_enhancer.HypixelEnhancer;
 import com.mrqueequeg.hypixel_enhancer.access.PlayerEntityMixinAccess;
 import com.mrqueequeg.hypixel_enhancer.config.Config;
 import com.mrqueequeg.hypixel_enhancer.config.ConfigManager;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
@@ -24,6 +23,7 @@ public abstract class PlayerEntityMixin implements PlayerEntityMixinAccess {
 
     private boolean _isMurder = false;
     private boolean _isRealPlayer = false;
+    private boolean _hasBow = false;
 
     @Override
     public boolean isMurder() {
@@ -35,10 +35,16 @@ public abstract class PlayerEntityMixin implements PlayerEntityMixinAccess {
         return _isRealPlayer;
     }
 
+    @Override
+    public boolean hasBow() {
+        return _hasBow;
+    }
+
     @Inject(at = @At("RETURN"), method = "<init>")
     private void onInit(World world, BlockPos pos, float yaw, GameProfile profile, CallbackInfo info) {
         if (ConfigManager.getConfig().enabled) {
             _isMurder = Config.MurderMystery.markedMurders.contains(profile.getId());
+            _hasBow = Config.MurderMystery.markedDetectives.contains(profile.getId());
         }
     }
 
@@ -46,8 +52,8 @@ public abstract class PlayerEntityMixin implements PlayerEntityMixinAccess {
     private void onTick(CallbackInfo info) {
         if (ConfigManager.getConfig().enabled) {
             PlayerEntity player = (PlayerEntity)(Object)this;
-            // The player tab list changes now and then which is why is has to be checked regularly
-            _isRealPlayer = !player.isSleeping() && !(player instanceof ClientPlayerEntity) && !player.isCreative() && HypixelEnhancer.isPlayerInTabList(player);
+            // Has to be checked regularly
+            _isRealPlayer = !player.isSleeping() && !player.isMainPlayer() && HypixelEnhancer.isPlayerInTabList(player);
         }
     }
 
@@ -55,10 +61,14 @@ public abstract class PlayerEntityMixin implements PlayerEntityMixinAccess {
     private void onEquip(EquipmentSlot slot, CallbackInfoReturnable<ItemStack> info) {
         if (ConfigManager.getConfig().enabled) {
             Config config = ConfigManager.getConfig();
-            if (config.murdermystery.isEnabled() && !Config.MurderMystery.clientIsMurder) {
-                PlayerEntity player = (PlayerEntity)(Object)this;
-                if (!_isMurder && !(player instanceof ClientPlayerEntity) && !player.isSpectator()) {
-                    if (Config.MurderMystery.isMurderItem(info.getReturnValue().getItem())) {
+            if (Config.MurderMystery.isActive() && !Config.roundHasEnded && !Config.MurderMystery.clientIsMurder) {
+                if (!isMurder() && isRealPlayer()) {
+                    Item holdItem = info.getReturnValue().getItem();
+                    if (!hasBow() && holdItem == Items.BOW || holdItem == Items.ARROW) {
+                        _hasBow = true;
+                        Config.MurderMystery.markedDetectives.add(((PlayerEntity)(Object)this).getGameProfile().getId());
+                    }
+                    else if (Config.MurderMystery.isMurderItem(holdItem)) {
                         HypixelEnhancer.printChatMsg(new TranslatableText("message.murder_mystery.murder_marked", Formatting.RED+((PlayerEntity)(Object)this).getGameProfile().getName()));
                         _isMurder = true;
                         Config.MurderMystery.markedMurders.add(((PlayerEntity)(Object)this).getGameProfile().getId());
