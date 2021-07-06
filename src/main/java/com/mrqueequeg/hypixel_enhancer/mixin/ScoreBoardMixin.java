@@ -1,11 +1,13 @@
 package com.mrqueequeg.hypixel_enhancer.mixin;
 
+import com.mrqueequeg.hypixel_enhancer.HypixelEnhancer;
 import com.mrqueequeg.hypixel_enhancer.config.Config;
 import com.mrqueequeg.hypixel_enhancer.config.ConfigManager;
 import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.scoreboard.ScoreboardCriterion;
 import net.minecraft.scoreboard.ScoreboardObjective;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -19,13 +21,13 @@ public class ScoreBoardMixin {
         // Used for detecting active mini-game
         if (ConfigManager.getConfig().enabled && Config.onHypixelServer) {
             String displayNameString = displayName.getString();
-            //Logger.sendChatMessage(Text.of(Formatting.GREEN+name+": "+displayNameString));
+            HypixelEnhancer.printChatMsg(Text.of(Formatting.GREEN+name+": "+displayNameString));
             if (displayNameString.equalsIgnoreCase("murder mystery")) {
                 if (name.equalsIgnoreCase("prescoreboard") || name.equalsIgnoreCase("mmlobby")) {
                     Config.currentLobby = Config.HypixelLobbies.MurderMysteryLobby;
                 }
                 else if (Config.currentLobby != Config.HypixelLobbies.MurderMystery && name.equalsIgnoreCase("murdermystery")) {
-                    Config.reset(Config.HypixelLobbies.MurderMystery);
+                    Config.resetLobby(Config.HypixelLobbies.MurderMystery);
                     Config.currentLobby = Config.HypixelLobbies.MurderMystery;
                 }
             }

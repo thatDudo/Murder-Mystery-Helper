@@ -69,23 +69,20 @@ public class Config {
         MurderMysteryLobby // waiting room
     }
 
-//    public static void reset() {
-//        currentLobby = HypixelLobbies.None;
-//        roundHasEnded = false;
-//        for (HypixelLobbies lobby : HypixelLobbies.values()) {
-//            reset(lobby);
-//        }
-//    }
+    public static void reset() {
+        roundHasEnded = false;
+        resetLobby(currentLobby);
+        currentLobby = HypixelLobbies.None;
+    }
 
     /**
      * Reset configurations
      * @param lobby Lobby from which the config is to be reseted
      */
-    public static void reset(HypixelLobbies lobby) {
+    public static void resetLobby(HypixelLobbies lobby) {
         if (lobby == HypixelLobbies.MurderMystery) {
             MurderMystery.reset();
         }
-        roundHasEnded = false;
     }
 
     /**
