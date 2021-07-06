@@ -21,7 +21,7 @@ public class ScoreBoardMixin {
         // Used for detecting active mini-game
         if (ConfigManager.getConfig().enabled && Config.onHypixelServer) {
             String displayNameString = displayName.getString();
-            HypixelEnhancer.printChatMsg(Text.of(Formatting.GREEN+name+": "+displayNameString));
+//            HypixelEnhancer.printChatMsg(Text.of(Formatting.GREEN+name+": "+displayNameString));
             if (displayNameString.equalsIgnoreCase("murder mystery")) {
                 if (name.equalsIgnoreCase("prescoreboard") || name.equalsIgnoreCase("mmlobby")) {
                     Config.currentLobby = Config.HypixelLobbies.MurderMysteryLobby;

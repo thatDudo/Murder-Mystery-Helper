@@ -40,35 +40,35 @@ public class ScreenBuilder {
         AbstractConfigListEntry<Boolean> toggleMurderMysteryInnocentMode = entryBuilder.startBooleanToggle(new TranslatableText("config.generic.hypixel.murder_mystery.innocent_mode.title"), config.murdermystery.innocentHelp)
                 .setDefaultValue(defaults.murdermystery.innocentHelp)
                 .setTooltip(new TranslatableText("config.generic.hypixel.murder_mystery.innocent_mode.tooltip"))
-                .setSaveConsumer(n -> config.murdermystery.innocentHelp = n)
+                .setSaveConsumer(config.murdermystery::setInnocentHelp)
                 .build();
 
         // murder mode
         AbstractConfigListEntry<Boolean> toggleMurderMysteryMurderMode = entryBuilder.startBooleanToggle(new TranslatableText("config.generic.hypixel.murder_mystery.murder_mode.title"), config.murdermystery.murderHelp)
                 .setDefaultValue(defaults.murdermystery.murderHelp)
                 .setTooltip(new TranslatableText("config.generic.hypixel.murder_mystery.murder_mode.tooltip"))
-                .setSaveConsumer(n -> config.murdermystery.murderHelp = n)
+                .setSaveConsumer(config.murdermystery::setMurderHelp)
                 .build();
 
         // show name tags
         AbstractConfigListEntry<Boolean> toggleMurderMysteryShowNameTag = entryBuilder.startBooleanToggle(new TranslatableText("config.generic.hypixel.murder_mystery.show_name_tags.title"), config.murdermystery.showNameTags)
                 .setDefaultValue(defaults.murdermystery.showNameTags)
                 .setTooltip(new TranslatableText("config.generic.hypixel.murder_mystery.show_name_tags.tooltip"))
-                .setSaveConsumer(n -> config.murdermystery.showNameTags = n)
+                .setSaveConsumer(config.murdermystery::setShowNameTags)
                 .build();
 
         // highlight detectives
         AbstractConfigListEntry<Boolean> toggleHighlightDetectives = entryBuilder.startBooleanToggle(new TranslatableText("config.generic.hypixel.murder_mystery.highlight_detective.title"), config.murdermystery.highlightDetectives)
                 .setDefaultValue(defaults.murdermystery.highlightDetectives)
                 .setTooltip(new TranslatableText("config.generic.hypixel.murder_mystery.highlight_detective.tooltip"))
-                .setSaveConsumer(n -> config.murdermystery.highlightDetectives = n)
+                .setSaveConsumer(config.murdermystery::setHighlightDetectives)
                 .build();
 
         // highlight items
         AbstractConfigListEntry<Boolean> toggleHighlightItems = entryBuilder.startBooleanToggle(new TranslatableText("config.generic.hypixel.murder_mystery.highlight_items.title"), config.murdermystery.highlightItems)
                 .setDefaultValue(defaults.murdermystery.highlightItems)
                 .setTooltip(new TranslatableText("config.generic.hypixel.murder_mystery.highlight_items.tooltip"))
-                .setSaveConsumer(n -> config.murdermystery.highlightItems = n)
+                .setSaveConsumer(config.murdermystery::setHighlightItems)
                 .build();
 
 

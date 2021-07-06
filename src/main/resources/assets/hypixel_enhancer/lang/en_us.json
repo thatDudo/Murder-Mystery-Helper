@@ -5,7 +5,7 @@
   "message.enabled": "%s enabled",
   "message.disabled": "%s disabled",
   "message.murder_mystery.murder_marked": "Found Murder: %s",
-  "message.murder_mystery.starting_murder_mode": "Murder Mode: ACTIVATED",
+  "message.murder_mystery.starting_murder_mode": "Murder Help Activated",
 
   "key.category.hypixel_enhancer": "Murder Mystery Mod",
   "key.hypixel_enhancer.settings": "Open Settings",
