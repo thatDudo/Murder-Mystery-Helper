@@ -1,12 +1,14 @@
 package com.mrqueequeg.hypixel_enhancer.mixin;
 
+import com.mrqueequeg.hypixel_enhancer.access.PlayerEntityMixinAccess;
 import com.mrqueequeg.hypixel_enhancer.config.Config;
 import com.mrqueequeg.hypixel_enhancer.config.ConfigManager;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
-import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.ItemEntity;
+import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -15,44 +17,39 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Entity.class)
 public abstract class EntityMixin {
 
-    public boolean isRealPlayer(PlayerEntity player) {
-        // ids of players are sometimes different from this player list
-        //return MinecraftClient.getInstance().player.networkHandler.getPlayerUuids().contains(player.getGameProfile().getId());
-        // using names
-        for (PlayerListEntry entry : MinecraftClient.getInstance().player.networkHandler.getPlayerList()) {
-            if (entry.getProfile().getName().equals(player.getGameProfile().getName())) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Inject(at = @At("HEAD"), method = "isGlowing", cancellable = true)
-    private void onIsGlowing(CallbackInfoReturnable<Boolean> info) {
-        if (ConfigManager.getConfig().enabled) {
-            Config config = ConfigManager.getConfig();
-            if (config.murdermystery.isEnabled() && config.murdermystery.innocentMode) {
-                Object t = (Object) this;
-                if (t instanceof PlayerEntity && !((PlayerEntity)t).isSpectator()) {
-                    if (((Config.MurderMystery.isMurder && config.murdermystery.murderMode && !(t instanceof ClientPlayerEntity))
-                            || Config.MurderMystery.markedMurders.contains(((PlayerEntity)t).getGameProfile().getId()))) {
-                        if (isRealPlayer((PlayerEntity)t)) {
-                            info.setReturnValue(true);
-                        }
-                    }
-                }
-            }
-        }
-    }
+    // TODO: Make a shouldGlow variable for performance improvements
 
     @Inject(at = @At("HEAD"), method = "getTeamColorValue", cancellable = true)
     private void onGetTeamColorValue(CallbackInfoReturnable<Integer> info) {
         if (ConfigManager.getConfig().enabled) {
             Config config = ConfigManager.getConfig();
-            if (config.murdermystery.isEnabled() && config.murdermystery.innocentMode) {
+            if (Config.MurderMystery.isActive()) {
                 Object t = (Object) this;
-                if (t instanceof PlayerEntity && Config.MurderMystery.markedMurders.contains(((PlayerEntity)t).getGameProfile().getId())) {
-                    info.setReturnValue(0xFF1111);
+                if (t instanceof PlayerEntity) {
+                    if (config.murdermystery.innocentHelp && ((PlayerEntityMixinAccess)t).isMurder()) {
+                        info.setReturnValue(Config.MurderMystery.murderTeamColorValue);
+                    }
+                    else if (((PlayerEntityMixinAccess)t).hasBow()) {
+                        info.setReturnValue(Config.MurderMystery.detectiveTeamColorValue);
+                    }
+                }
+                else if (config.murdermystery.highlightItems) {
+                    if (t instanceof ArmorStandEntity) {
+                        ArmorStandEntity entity = (ArmorStandEntity) t;
+                        if (entity.isInvisible()&&!entity.isAttackable()&&!entity.isSmall()&&!entity.shouldHideBasePlate()) {
+                            for (ItemStack heldItem : entity.getItemsHand()) {
+                                if (heldItem.getItem() == Items.BOW) {
+                                    info.setReturnValue(Config.MurderMystery.bowTeamColorValue);
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    else if (t instanceof ItemEntity) {
+                        if (((ItemEntity)t).getStack().getItem() == Items.GOLD_INGOT) {
+                            info.setReturnValue(Config.MurderMystery.goldTeamColorValue);
+                        }
+                    }
                 }
             }
         }

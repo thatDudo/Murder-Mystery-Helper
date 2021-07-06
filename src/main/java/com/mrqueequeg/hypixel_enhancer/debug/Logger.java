@@ -3,6 +3,7 @@ package com.mrqueequeg.hypixel_enhancer.debug;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
 
+// TODO: Remove class because not used...
 public class Logger {
     public static boolean enabled = true;
     public static boolean debug = true;

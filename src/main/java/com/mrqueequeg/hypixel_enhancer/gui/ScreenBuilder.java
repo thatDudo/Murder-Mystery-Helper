@@ -1,5 +1,6 @@
 package com.mrqueequeg.hypixel_enhancer.gui;
 
+import com.mrqueequeg.hypixel_enhancer.HypixelEnhancer;
 import com.mrqueequeg.hypixel_enhancer.config.Config;
 import com.mrqueequeg.hypixel_enhancer.config.ConfigManager;
 import me.shedaniel.clothconfig2.api.AbstractConfigListEntry;
@@ -32,21 +33,21 @@ public class ScreenBuilder {
         AbstractConfigListEntry<Boolean> toggleEnabled = entryBuilder.startBooleanToggle(new TranslatableText("config.generic.enabled.title"), config.enabled)
                 .setDefaultValue(defaults.enabled)
                 .setTooltip(new TranslatableText("config.generic.enabled.tooltip"))
-                .setSaveConsumer(n -> config.enabled = n)
+                .setSaveConsumer(HypixelEnhancer::setModEnabled)
                 .build();
 
-        // glow marking
-        AbstractConfigListEntry<Boolean> toggleMurderMysteryInnocentMode = entryBuilder.startBooleanToggle(new TranslatableText("config.generic.hypixel.murder_mystery.innocent_mode.title"), config.murdermystery.innocentMode)
-                .setDefaultValue(defaults.murdermystery.innocentMode)
+        // innocent mode
+        AbstractConfigListEntry<Boolean> toggleMurderMysteryInnocentMode = entryBuilder.startBooleanToggle(new TranslatableText("config.generic.hypixel.murder_mystery.innocent_mode.title"), config.murdermystery.innocentHelp)
+                .setDefaultValue(defaults.murdermystery.innocentHelp)
                 .setTooltip(new TranslatableText("config.generic.hypixel.murder_mystery.innocent_mode.tooltip"))
-                .setSaveConsumer(n -> config.murdermystery.innocentMode = n)
+                .setSaveConsumer(n -> config.murdermystery.innocentHelp = n)
                 .build();
 
         // murder mode
-        AbstractConfigListEntry<Boolean> toggleMurderMysteryMurderMode = entryBuilder.startBooleanToggle(new TranslatableText("config.generic.hypixel.murder_mystery.murder_mode.title"), config.murdermystery.murderMode)
-                .setDefaultValue(defaults.murdermystery.murderMode)
+        AbstractConfigListEntry<Boolean> toggleMurderMysteryMurderMode = entryBuilder.startBooleanToggle(new TranslatableText("config.generic.hypixel.murder_mystery.murder_mode.title"), config.murdermystery.murderHelp)
+                .setDefaultValue(defaults.murdermystery.murderHelp)
                 .setTooltip(new TranslatableText("config.generic.hypixel.murder_mystery.murder_mode.tooltip"))
-                .setSaveConsumer(n -> config.murdermystery.murderMode = n)
+                .setSaveConsumer(n -> config.murdermystery.murderHelp = n)
                 .build();
 
         // show name tags
@@ -56,12 +57,27 @@ public class ScreenBuilder {
                 .setSaveConsumer(n -> config.murdermystery.showNameTags = n)
                 .build();
 
+        // highlight detectives
+        AbstractConfigListEntry<Boolean> toggleHighlightDetectives = entryBuilder.startBooleanToggle(new TranslatableText("config.generic.hypixel.murder_mystery.highlight_detective.title"), config.murdermystery.highlightDetectives)
+                .setDefaultValue(defaults.murdermystery.highlightDetectives)
+                .setTooltip(new TranslatableText("config.generic.hypixel.murder_mystery.highlight_detective.tooltip"))
+                .setSaveConsumer(n -> config.murdermystery.highlightDetectives = n)
+                .build();
+
+        // highlight items
+        AbstractConfigListEntry<Boolean> toggleHighlightItems = entryBuilder.startBooleanToggle(new TranslatableText("config.generic.hypixel.murder_mystery.highlight_items.title"), config.murdermystery.highlightItems)
+                .setDefaultValue(defaults.murdermystery.highlightItems)
+                .setTooltip(new TranslatableText("config.generic.hypixel.murder_mystery.highlight_items.tooltip"))
+                .setSaveConsumer(n -> config.murdermystery.highlightItems = n)
+                .build();
 
 
         catGeneric.addEntry(toggleEnabled);
         catGeneric.addEntry(toggleMurderMysteryInnocentMode);
         catGeneric.addEntry(toggleMurderMysteryMurderMode);
         catGeneric.addEntry(toggleMurderMysteryShowNameTag);
+        catGeneric.addEntry(toggleHighlightDetectives);
+        catGeneric.addEntry(toggleHighlightItems);
 
         return builder.build();
     }

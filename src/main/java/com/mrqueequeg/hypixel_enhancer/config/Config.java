@@ -16,23 +16,32 @@ public class Config {
     @Expose public MurderMystery murdermystery = new MurderMystery();
 
     public static boolean onHypixelServer = false;
-    public static HypixelLobbies activeMiniGame = HypixelLobbies.None;
+    public static HypixelLobbies currentLobby = HypixelLobbies.None;
+    public static boolean roundHasEnded = false;
 
     public static final class MurderMystery {
-        @Expose public boolean murderMode = true;
-        @Expose public boolean innocentMode = true;
+        @Expose public boolean murderHelp = true;
+        @Expose public boolean innocentHelp = true;
         @Expose public boolean showNameTags = false;
-
-        public boolean isEnabled() {
-            return activeMiniGame == HypixelLobbies.MurderMystery;
-        }
+        @Expose public boolean highlightItems = false;
+        @Expose public boolean highlightDetectives = false;
 
         public boolean validate() {
             return true;
         }
 
-        public static boolean isMurder = false;
+        public static boolean isActive() {
+            return currentLobby == HypixelLobbies.MurderMystery;
+        }
+
+        public static boolean clientIsMurder = false;
         public static ArrayList<UUID> markedMurders = new ArrayList<>();
+        public static ArrayList<UUID> markedDetectives = new ArrayList<>();
+
+        public static final int murderTeamColorValue = 0xFF1111;
+        public static final int detectiveTeamColorValue = 0x15BFD6;
+        public static final int bowTeamColorValue = 0x21E808;
+        public static final int goldTeamColorValue = 0xFFF126;
 
         public static final ArrayList<Item> MURDER_ITEMS = new ArrayList<>(Arrays.asList(
                 Items.STICK, Items.DEAD_BUSH, Items.CARROT, Items.GOLDEN_CARROT, Items.NAME_TAG, Items.GOLDEN_PICKAXE,
@@ -41,12 +50,11 @@ public class Config {
                 Items.SALMON, Items.SHEARS, Items.REDSTONE_TORCH, Items.DIAMOND_HOE, Items.WOODEN_AXE, Items.DIAMOND_AXE,
                 Items.CARROT_ON_A_STICK
         ));
-        public static void resetMarkedPlayers() {
-            markedMurders = new ArrayList<>();
-        }
+
         public static void reset() {
-            isMurder = false;
-            resetMarkedPlayers();
+            clientIsMurder = false;
+            markedMurders.clear();
+            markedDetectives.clear();
         }
         public static boolean isMurderItem(Item item) {
             return item instanceof SwordItem
@@ -58,8 +66,16 @@ public class Config {
     public enum HypixelLobbies {
         None,
         MurderMystery,
-        MurderMysteryLobby
+        MurderMysteryLobby // waiting room
     }
+
+//    public static void reset() {
+//        currentLobby = HypixelLobbies.None;
+//        roundHasEnded = false;
+//        for (HypixelLobbies lobby : HypixelLobbies.values()) {
+//            reset(lobby);
+//        }
+//    }
 
     /**
      * Reset configurations
@@ -69,7 +85,7 @@ public class Config {
         if (lobby == HypixelLobbies.MurderMystery) {
             MurderMystery.reset();
         }
-        activeMiniGame = HypixelLobbies.None;
+        roundHasEnded = false;
     }
 
     /**
@@ -77,6 +93,8 @@ public class Config {
      */
     public boolean validate() {
         boolean valid = true;
+
+        // since only boolean toggles nothing can be invalid
 
         return valid && murdermystery.validate();
     }

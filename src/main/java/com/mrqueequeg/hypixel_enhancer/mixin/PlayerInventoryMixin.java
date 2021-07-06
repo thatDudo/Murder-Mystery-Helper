@@ -1,8 +1,8 @@
 package com.mrqueequeg.hypixel_enhancer.mixin;
 
+import com.mrqueequeg.hypixel_enhancer.HypixelEnhancer;
 import com.mrqueequeg.hypixel_enhancer.config.Config;
 import com.mrqueequeg.hypixel_enhancer.config.ConfigManager;
-import com.mrqueequeg.hypixel_enhancer.debug.Logger;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.TranslatableText;
@@ -19,12 +19,12 @@ public class PlayerInventoryMixin {
     private void onSetStack(int slot, ItemStack stack, CallbackInfo info) {
         if (ConfigManager.getConfig().enabled) {
             Config config = ConfigManager.getConfig();
-            if (config.murdermystery.isEnabled() && !Config.MurderMystery.isMurder) {
+            if (config.murdermystery.isActive() && !Config.MurderMystery.clientIsMurder) {
                 // If player gets murder item set isMurder to true
                 if (stack.hasCustomName()) {
                     if (stack.getName().getString().equals("Knife")) {
-                        Logger.sendMessage(new TranslatableText("message.murder_mystery.starting_murder_mode").formatted(Formatting.RED), true);
-                        Config.MurderMystery.isMurder = true;
+                        HypixelEnhancer.printChatMsg(new TranslatableText("message.murder_mystery.starting_murder_mode").formatted(Formatting.RED));
+                        Config.MurderMystery.clientIsMurder = true;
                     }
                 }
             }
