@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class InGameHudMixin {
 
     @Inject(at = @At("HEAD"), method = "setTitles")
-    private void onSetTitle(Text title, CallbackInfo info) {
+    private void onSetTitle(Text title, Text subtitle, int titleFadeInTicks, int titleRemainTicks, int titleFadeOutTicks, CallbackInfo info) {
         if (ConfigManager.getConfig().enabled) {
             // Detect if round has ended
             // only works in english
