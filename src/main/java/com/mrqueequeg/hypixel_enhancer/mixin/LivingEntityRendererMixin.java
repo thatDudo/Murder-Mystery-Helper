@@ -18,9 +18,8 @@ public class LivingEntityRendererMixin {
     public void onShouldRenderName(LivingEntity livingEntity, CallbackInfoReturnable<Boolean> info) {
         if (ConfigManager.getConfig().enabled) {
             Config config = ConfigManager.getConfig();
-            if (config.murdermystery.isActive() && config.murdermystery.showNameTags) {
-                Object t = (Object) livingEntity;
-                if (t instanceof PlayerEntity && ((PlayerEntityMixinAccess)livingEntity).isRealPlayer()) {
+            if (Config.MurderMystery.isActive() && config.murdermystery.shouldShowNameTags()) {
+                if (livingEntity instanceof PlayerEntity && ((PlayerEntityMixinAccess)livingEntity).isRealPlayer()) {
                     info.setReturnValue(true);
                 }
             }

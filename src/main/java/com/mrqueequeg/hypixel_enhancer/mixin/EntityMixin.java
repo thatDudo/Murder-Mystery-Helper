@@ -26,31 +26,30 @@ public abstract class EntityMixin {
             if (Config.MurderMystery.isActive()) {
                 Object t = (Object) this;
                 if (t instanceof PlayerEntity) {
-                    if (config.murdermystery.innocentHelp && ((PlayerEntityMixinAccess)t).isMurder()) {
+                    if (config.murdermystery.shouldHighlightMurders() && ((PlayerEntityMixinAccess)t).isMurder()) {
                         info.setReturnValue(Config.MurderMystery.murderTeamColorValue);
                     }
-                    else if (((PlayerEntityMixinAccess)t).hasBow()) {
+                    else if (config.murdermystery.shouldHighlightDetectives() && ((PlayerEntityMixinAccess)t).hasBow()) {
                         info.setReturnValue(Config.MurderMystery.detectiveTeamColorValue);
                     }
                 }
-                else if (config.murdermystery.highlightItems) {
-                    if (t instanceof ArmorStandEntity) {
-                        ArmorStandEntity entity = (ArmorStandEntity) t;
-                        if (entity.isInvisible()&&!entity.isAttackable()&&!entity.isSmall()&&!entity.shouldHideBasePlate()) {
-                            for (ItemStack heldItem : entity.getItemsHand()) {
-                                if (heldItem.getItem() == Items.BOW) {
-                                    info.setReturnValue(Config.MurderMystery.bowTeamColorValue);
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    else if (t instanceof ItemEntity) {
+                else if (config.murdermystery.shouldHighlightGold() && t instanceof ItemEntity) {
+                    if (t instanceof ItemEntity) {
                         if (((ItemEntity)t).getStack().getItem() == Items.GOLD_INGOT) {
                             info.setReturnValue(Config.MurderMystery.goldTeamColorValue);
                         }
                     }
                 }
+//                else if (t instanceof ArmorStandEntity entity) {
+//                    if (entity.isInvisible()&&!entity.isAttackable()&&!entity.isSmall()&&!entity.shouldHideBasePlate()) {
+//                        for (ItemStack heldItem : entity.getItemsHand()) {
+//                            if (heldItem.getItem() == Items.BOW) {
+//                                info.setReturnValue(Config.MurderMystery.bowTeamColorValue);
+//                                break;
+//                            }
+//                        }
+//                    }
+//                }
             }
         }
     }

@@ -2,6 +2,7 @@ package com.mrqueequeg.hypixel_enhancer.config;
 
 import com.google.gson.annotations.Expose;
 import net.minecraft.item.*;
+import net.minecraft.text.TranslatableText;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,45 +21,98 @@ public class Config {
     public static boolean roundHasEnded = false;
 
     public static final class MurderMystery {
-        @Expose public boolean murderHelp = true;
-        @Expose public boolean innocentHelp = true;
-        @Expose public boolean showNameTags = false;
-        @Expose public boolean highlightItems = false;
-        @Expose public boolean highlightDetectives = false;
+        @Expose public boolean highlightMurders = true;
+        @Expose public InnocentHighlightOptions innocentHighlightOptions = InnocentHighlightOptions.AS_MURDER;
+        @Expose public DetectiveHighlightOptions detectiveHighlightOptions = DetectiveHighlightOptions.NEVER;
+        @Expose public boolean highlightGold = false;
 
-        public void setMurderHelp(boolean state) {
-            if (murderHelp != state) {
+        @Expose public boolean showNameTags = false;
+
+        public void setHighlightMurders(boolean state) {
+            if (highlightMurders != state) {
                 if (!state) {
                     markedMurders.clear();
                 }
-                murderHelp = state;
+                highlightMurders = state;
             }
         }
 
-        public void setInnocentHelp(boolean state) {
-            innocentHelp = state;
+        public void setInnocentHighlightOptions(InnocentHighlightOptions state) {
+            innocentHighlightOptions = state;
         }
 
         public void setShowNameTags(boolean state) {
             showNameTags = state;
         }
 
-        public void setHighlightItems(boolean state) {
-            highlightItems = state;
+        public void setHighlightGold(boolean state) {
+            highlightGold = state;
         }
 
-        public void setHighlightDetectives(boolean state) {
-            if (highlightDetectives != state) {
-                if (!state) {
+        public void setDetectiveHighlightOptions(DetectiveHighlightOptions state) {
+            if (detectiveHighlightOptions != state) {
+                detectiveHighlightOptions = state;
+                if (!shouldHighlightDetectives()) {
                     markedDetectives.clear();
                 }
-                highlightDetectives = state;
             }
+        }
+
+        public boolean shouldHighlightInnocents() {
+            return innocentHighlightOptions == InnocentHighlightOptions.ALWAYS || (innocentHighlightOptions == InnocentHighlightOptions.AS_MURDER && clientIsMurder);
+        }
+
+        public boolean shouldHighlightDetectives() {
+            return detectiveHighlightOptions == DetectiveHighlightOptions.ALWAYS || (detectiveHighlightOptions == DetectiveHighlightOptions.AS_MURDER && clientIsMurder);
+        }
+
+        public boolean shouldHighlightMurders() {
+            return highlightMurders;
+        }
+
+        public boolean shouldHighlightGold() {
+            return highlightGold;
+        }
+
+        public boolean shouldShowNameTags() {
+            return showNameTags;
         }
 
         public boolean validate() {
             return true;
         }
+
+        public enum InnocentHighlightOptions {
+            NEVER(new TranslatableText("config.generic.hypixel.murder_mystery.highlight.innocent.option.never")),
+            AS_MURDER(new TranslatableText("config.generic.hypixel.murder_mystery.highlight.innocent.option.as_murder")),
+            ALWAYS(new TranslatableText("config.generic.hypixel.murder_mystery.highlight.innocent.option.always"));
+
+            private final TranslatableText text;
+
+            InnocentHighlightOptions(TranslatableText text) {
+                this.text = text;
+            }
+
+            public TranslatableText getText() {
+                return this.text;
+            }
+        };
+
+        public enum DetectiveHighlightOptions {
+            NEVER(new TranslatableText("config.generic.hypixel.murder_mystery.highlight.detective.option.never")),
+            AS_MURDER(new TranslatableText("config.generic.hypixel.murder_mystery.highlight.detective.option.as_murder")),
+            ALWAYS(new TranslatableText("config.generic.hypixel.murder_mystery.highlight.detective.option.always"));
+
+            private final TranslatableText text;
+
+            DetectiveHighlightOptions(TranslatableText text) {
+                this.text = text;
+            }
+
+            public TranslatableText getText() {
+                return this.text;
+            }
+        };
 
         public static boolean isActive() {
             return currentLobby == HypixelLobbies.MurderMystery;

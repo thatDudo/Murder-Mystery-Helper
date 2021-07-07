@@ -20,20 +20,31 @@
 
   "config.generic.hypixel.section.enabled.title": "Enabled",
   "config.generic.hypixel.section.enabled.tooltip": "Toggle to enable/disable this section",
-  "config.generic.hypixel.section.show_bow_trajectory.title": "Show bow trajectory",
-  "config.generic.hypixel.section.show_bow_trajectory.tooltip": "Renders a line showing the trajectory of the bow",
 
   "config.generic.hypixel.murder_mystery.title": "Murder Mystery",
-  "config.generic.hypixel.murder_mystery.innocent_mode.title": "Innocent Help",
-  "config.generic.hypixel.murder_mystery.innocent_mode.tooltip": "Highlights all detected murders.\nThe detection fires when they equip a murder item.",
-  "config.generic.hypixel.murder_mystery.murder_mode.title": "Murder Help",
-  "config.generic.hypixel.murder_mystery.murder_mode.tooltip": "Highlights all players you need to kill",
-  "config.generic.hypixel.murder_mystery.show_name_tags.title": "Show name tags",
-  "config.generic.hypixel.murder_mystery.show_name_tags.tooltip": "Forces the client to render name tags",
+  "config.generic.hypixel.murder_mystery.highlight.title": "Highlight Targets",
+  "config.generic.hypixel.murder_mystery.highlight.innocent.title": "Innocents",
+  "config.generic.hypixel.murder_mystery.highlight.innocent.option.never": "Never",
+  "config.generic.hypixel.murder_mystery.highlight.innocent.option.as_murder": "As Murder",
+  "config.generic.hypixel.murder_mystery.highlight.innocent.option.always": "Always",
+  "config.generic.hypixel.murder_mystery.highlight.detective.title": "Players with Bow",
+  "config.generic.hypixel.murder_mystery.highlight.detective.option.never": "Never",
+  "config.generic.hypixel.murder_mystery.highlight.detective.option.as_murder": "As Murder",
+  "config.generic.hypixel.murder_mystery.highlight.detective.option.always": "Always",
+  "config.generic.hypixel.murder_mystery.highlight.detective.tooltip": "Players that have equipped a bow once",
+  "config.generic.hypixel.murder_mystery.highlight.murder.title": "Murders",
+  "config.generic.hypixel.murder_mystery.highlight.murder.tooltip": "Players that have equipped a murder weapon once",
+  "config.generic.hypixel.murder_mystery.highlight.gold.title": "Gold Ingots",
+  "config.generic.hypixel.murder_mystery.highlight.gold.tooltip": "",
+  "config.generic.hypixel.murder_mystery.highlight.bow.title": "Dropped Bows",
+  "config.generic.hypixel.murder_mystery.highlight.bow.tooltip": "",
+
+  "config.generic.hypixel.murder_mystery.misc.title": "Misc",
+  "config.generic.hypixel.murder_mystery.misc.show_name_tags.title": "Show name tags",
+  "config.generic.hypixel.murder_mystery.misc.show_name_tags.tooltip": "Forces the client to render name tags",
+
   "config.generic.hypixel.murder_mystery.hide_death_banner.title": "Hide death banner",
   "config.generic.hypixel.murder_mystery.hide_death_banner.tooltip": "Hides the banner bestowed on you upon death",
-  "config.generic.hypixel.murder_mystery.highlight_detective.title": "Highlight players with bow",
-  "config.generic.hypixel.murder_mystery.highlight_detective.tooltip": "Makes players that have equipped their bow\nonce glow with a blue color",
-  "config.generic.hypixel.murder_mystery.highlight_items.title": "Highlight items on the ground",
-  "config.generic.hypixel.murder_mystery.highlight_items.tooltip": "Makes gold ingots on the ground glow"
+  "config.generic.hypixel.section.show_bow_trajectory.title": "Show bow trajectory",
+  "config.generic.hypixel.section.show_bow_trajectory.tooltip": "Renders a line showing the trajectory of the bow"
 }

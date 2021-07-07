@@ -23,7 +23,7 @@ public class PlayerInventoryMixin {
                 if (stack.hasCustomName()) {
                     //if (stack.getName().getString().equals("Knife")) {
                     if (Config.MurderMystery.isMurderItem(stack.getItem())) {
-                        HypixelEnhancer.printChatMsg(new TranslatableText("message.murder_mystery.starting_murder_mode").formatted(Formatting.RED));
+//                        HypixelEnhancer.printChatMsg(new TranslatableText("message.murder_mystery.starting_murder_mode").formatted(Formatting.RED));
                         Config.MurderMystery.clientIsMurder = true;
                     }
                 }
