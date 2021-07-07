@@ -61,14 +61,14 @@ public abstract class PlayerEntityMixin implements PlayerEntityMixinAccess {
     private void onEquip(EquipmentSlot slot, CallbackInfoReturnable<ItemStack> info) {
         if (ConfigManager.getConfig().enabled) {
             Config config = ConfigManager.getConfig();
-            if (Config.MurderMystery.isActive() && !Config.roundHasEnded && !Config.MurderMystery.clientIsMurder) {
+            if (Config.MurderMystery.isActive() && !Config.roundHasEnded) {
                 if (!isMurder() && isRealPlayer()) {
                     Item holdItem = info.getReturnValue().getItem();
-                    if (!hasBow() && holdItem == Items.BOW || holdItem == Items.ARROW) {
+                    if (!hasBow() && (holdItem == Items.BOW || holdItem == Items.ARROW)) {
                         _hasBow = true;
                         Config.MurderMystery.markedDetectives.add(((PlayerEntity)(Object)this).getGameProfile().getId());
                     }
-                    else if (Config.MurderMystery.isMurderItem(holdItem)) {
+                    else if (!Config.MurderMystery.clientIsMurder && Config.MurderMystery.isMurderItem(holdItem)) {
                         HypixelEnhancer.printChatMsg(new TranslatableText("message.murder_mystery.murder_marked", Formatting.RED+((PlayerEntity)(Object)this).getGameProfile().getName()));
                         _isMurder = true;
                         Config.MurderMystery.markedMurders.add(((PlayerEntity)(Object)this).getGameProfile().getId());
