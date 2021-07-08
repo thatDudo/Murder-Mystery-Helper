@@ -61,11 +61,18 @@ public class ScreenBuilder {
                 .setSaveConsumer(config.murdermystery::setHighlightMurders)
                 .build();
 
-        // highlight items
-        AbstractConfigListEntry<Boolean> toggleHighlightGold = entryBuilder.startBooleanToggle(new TranslatableText("config.generic.hypixel.murder_mystery.highlight.gold.title"), config.murdermystery.highlightGold)
+        // highlight gold
+        AbstractConfigListEntry<Boolean> toggleMurderMysteryHighlightGold = entryBuilder.startBooleanToggle(new TranslatableText("config.generic.hypixel.murder_mystery.highlight.gold.title"), config.murdermystery.highlightGold)
                 .setDefaultValue(defaults.murdermystery.highlightGold)
                 .setTooltip(new TranslatableText("config.generic.hypixel.murder_mystery.highlight.gold.tooltip"))
                 .setSaveConsumer(config.murdermystery::setHighlightGold)
+                .build();
+
+        // highlight bows
+        AbstractConfigListEntry<Boolean> toggleMurderMysteryHighlightBows = entryBuilder.startBooleanToggle(new TranslatableText("config.generic.hypixel.murder_mystery.highlight.bow.title"), config.murdermystery.highlightBows)
+                .setDefaultValue(defaults.murdermystery.highlightBows)
+                .setTooltip(new TranslatableText("config.generic.hypixel.murder_mystery.highlight.bow.tooltip"))
+                .setSaveConsumer(config.murdermystery::setHighlightBows)
                 .build();
 
         // show name tags
@@ -75,16 +82,25 @@ public class ScreenBuilder {
                 .setSaveConsumer(config.murdermystery::setShowNameTags)
                 .build();
 
+//        // highlight spectators
+//        AbstractConfigListEntry<Boolean> toggleMurderMysteryHighlightSpectators = entryBuilder.startBooleanToggle(new TranslatableText("config.generic.hypixel.murder_mystery.misc.highlight_spectators.title"), config.murdermystery.highlightSpectators)
+//                .setDefaultValue(defaults.murdermystery.highlightSpectators)
+//                .setTooltip(new TranslatableText("config.generic.hypixel.murder_mystery.misc.highlight_spectators.tooltip"))
+//                .setSaveConsumer(config.murdermystery::setHighlightSpectators)
+//                .build();
+
 
         SubCategoryBuilder subCatHighlight = entryBuilder.startSubCategory(new TranslatableText("config.generic.hypixel.murder_mystery.highlight.title"));
         subCatHighlight.add(enumMurderMysteryInnocentHighlightOptions);
         subCatHighlight.add(enumMurderMysteryDetectiveHighlightOptions);
         subCatHighlight.add(toggleMurderMysteryHighlightMurders);
-        subCatHighlight.add(toggleHighlightGold);
+        subCatHighlight.add(toggleMurderMysteryHighlightGold);
+        subCatHighlight.add(toggleMurderMysteryHighlightBows);
         subCatHighlight.setExpanded(true);
 
         SubCategoryBuilder subCatMisc = entryBuilder.startSubCategory(new TranslatableText("config.generic.hypixel.murder_mystery.misc.title"));
         subCatMisc.add(toggleMurderMysteryShowNameTags);
+//        subCatMisc.add(toggleMurderMysteryHighlightSpectators);
         subCatMisc.setExpanded(false);
 
         catGeneric.addEntry(toggleEnabled);

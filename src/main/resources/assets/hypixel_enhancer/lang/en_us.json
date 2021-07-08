@@ -42,6 +42,8 @@
   "config.generic.hypixel.murder_mystery.misc.title": "Misc",
   "config.generic.hypixel.murder_mystery.misc.show_name_tags.title": "Show name tags",
   "config.generic.hypixel.murder_mystery.misc.show_name_tags.tooltip": "Forces the client to render name tags",
+  "config.generic.hypixel.murder_mystery.misc.highlight_spectators.title": "Highlight spectators",
+  "config.generic.hypixel.murder_mystery.misc.highlight_spectators.tooltip": "After death other dead players will reappear as spectators.\nThis toggles if those should still get highlighted",
 
   "config.generic.hypixel.murder_mystery.hide_death_banner.title": "Hide death banner",
   "config.generic.hypixel.murder_mystery.hide_death_banner.tooltip": "Hides the banner bestowed on you upon death",

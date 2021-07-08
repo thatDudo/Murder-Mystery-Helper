@@ -12,7 +12,8 @@
     "PlayerInventoryMixin",
     "ScoreBoardMixin",
     "LivingEntityRendererMixin",
-    "InGameHudMixin"
+    "InGameHudMixin",
+    "ArmorStandEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -1,5 +1,6 @@
 package com.mrqueequeg.hypixel_enhancer.mixin;
 
+import com.mrqueequeg.hypixel_enhancer.access.EntityMixinAccess;
 import com.mrqueequeg.hypixel_enhancer.access.PlayerEntityMixinAccess;
 import com.mrqueequeg.hypixel_enhancer.config.Config;
 import com.mrqueequeg.hypixel_enhancer.config.ConfigManager;
@@ -15,41 +16,23 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Entity.class)
-public abstract class EntityMixin {
+public abstract class EntityMixin implements EntityMixinAccess {
 
-    // TODO: Make a shouldGlow variable for performance improvements
+    private int glowColor = -1;
+
+    @Override
+    public void setGlowColor(int color) {
+        glowColor = color;
+    }
 
     @Inject(at = @At("HEAD"), method = "getTeamColorValue", cancellable = true)
     private void onGetTeamColorValue(CallbackInfoReturnable<Integer> info) {
         if (ConfigManager.getConfig().enabled) {
             Config config = ConfigManager.getConfig();
             if (Config.MurderMystery.isActive()) {
-                Object t = (Object) this;
-                if (t instanceof PlayerEntity) {
-                    if (config.murdermystery.shouldHighlightMurders() && ((PlayerEntityMixinAccess)t).isMurder()) {
-                        info.setReturnValue(Config.MurderMystery.murderTeamColorValue);
-                    }
-                    else if (config.murdermystery.shouldHighlightDetectives() && ((PlayerEntityMixinAccess)t).hasBow()) {
-                        info.setReturnValue(Config.MurderMystery.detectiveTeamColorValue);
-                    }
+                if (glowColor >= 0) {
+                    info.setReturnValue(glowColor);
                 }
-                else if (config.murdermystery.shouldHighlightGold() && t instanceof ItemEntity) {
-                    if (t instanceof ItemEntity) {
-                        if (((ItemEntity)t).getStack().getItem() == Items.GOLD_INGOT) {
-                            info.setReturnValue(Config.MurderMystery.goldTeamColorValue);
-                        }
-                    }
-                }
-//                else if (t instanceof ArmorStandEntity entity) {
-//                    if (entity.isInvisible()&&!entity.isAttackable()&&!entity.isSmall()&&!entity.shouldHideBasePlate()) {
-//                        for (ItemStack heldItem : entity.getItemsHand()) {
-//                            if (heldItem.getItem() == Items.BOW) {
-//                                info.setReturnValue(Config.MurderMystery.bowTeamColorValue);
-//                                break;
-//                            }
-//                        }
-//                    }
-//                }
             }
         }
     }
