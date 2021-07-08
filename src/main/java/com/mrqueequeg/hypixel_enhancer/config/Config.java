@@ -2,7 +2,9 @@ package com.mrqueequeg.hypixel_enhancer.config;
 
 import com.google.gson.annotations.Expose;
 import net.minecraft.item.*;
+import net.minecraft.scoreboard.Team;
 import net.minecraft.text.TranslatableText;
+import net.minecraft.util.Formatting;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,8 +27,10 @@ public class Config {
         @Expose public InnocentHighlightOptions innocentHighlightOptions = InnocentHighlightOptions.AS_MURDER;
         @Expose public DetectiveHighlightOptions detectiveHighlightOptions = DetectiveHighlightOptions.NEVER;
         @Expose public boolean highlightGold = false;
+        @Expose public boolean highlightBows = false;
 
         @Expose public boolean showNameTags = false;
+        @Expose public boolean highlightSpectators = false;
 
         public void setHighlightMurders(boolean state) {
             if (highlightMurders != state) {
@@ -49,6 +53,10 @@ public class Config {
             highlightGold = state;
         }
 
+        public void setHighlightBows(boolean state) {
+            highlightBows = state;
+        }
+
         public void setDetectiveHighlightOptions(DetectiveHighlightOptions state) {
             if (detectiveHighlightOptions != state) {
                 detectiveHighlightOptions = state;
@@ -56,6 +64,10 @@ public class Config {
                     markedDetectives.clear();
                 }
             }
+        }
+
+        public void setHighlightSpectators(boolean state) {
+            highlightSpectators = state;
         }
 
         public boolean shouldHighlightInnocents() {
@@ -74,12 +86,31 @@ public class Config {
             return highlightGold;
         }
 
+        public boolean shouldHighlightBows() {
+            return highlightBows;
+        }
+
         public boolean shouldShowNameTags() {
             return showNameTags;
         }
 
+        public boolean shouldHighlightSpectators() {
+            return highlightSpectators;
+        }
+
         public boolean validate() {
-            return true;
+            boolean valid = true;
+
+            if (innocentHighlightOptions == null) {
+                innocentHighlightOptions = InnocentHighlightOptions.NEVER;
+                valid = false;
+            }
+            if (detectiveHighlightOptions == null) {
+                detectiveHighlightOptions = DetectiveHighlightOptions.NEVER;
+                valid = false;
+            }
+
+            return valid;
         }
 
         public enum InnocentHighlightOptions {
@@ -116,6 +147,7 @@ public class Config {
 
         public static boolean isActive() {
             return currentLobby == HypixelLobbies.MurderMystery;
+//            return true;
         }
 
         public static boolean clientIsMurder = false;
@@ -124,8 +156,8 @@ public class Config {
 
         public static final int murderTeamColorValue = 0xFF1111;
         public static final int detectiveTeamColorValue = 0x15BFD6;
-        public static final int bowTeamColorValue = 0x21E808;
         public static final int goldTeamColorValue = 0xFFF126;
+        public static final int bowTeamColorValue = 0x21E808;
 
         public static final ArrayList<Item> MURDER_ITEMS = new ArrayList<>(Arrays.asList(
                 Items.STICK, Items.DEAD_BUSH, Items.CARROT, Items.GOLDEN_CARROT, Items.NAME_TAG, Items.GOLDEN_PICKAXE,
@@ -140,6 +172,7 @@ public class Config {
             markedMurders.clear();
             markedDetectives.clear();
         }
+
         public static boolean isMurderItem(Item item) {
             return item instanceof SwordItem
                     || (item instanceof ShovelItem && item != Items.WOODEN_SHOVEL)

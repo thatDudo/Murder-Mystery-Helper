@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(InGameHud.class)
 public class InGameHudMixin {
 
-    @Inject(at = @At("HEAD"), method = "setTitle")
+    @Inject(at = @At("RETURN"), method = "setTitle")
     private void onSetTitle(Text title, CallbackInfo info) {
         if (ConfigManager.getConfig().enabled) {
             // Detect if round has ended
