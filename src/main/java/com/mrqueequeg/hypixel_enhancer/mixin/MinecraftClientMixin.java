@@ -1,6 +1,7 @@
 package com.mrqueequeg.hypixel_enhancer.mixin;
 
 import com.mrqueequeg.hypixel_enhancer.HypixelEnhancer;
+import com.mrqueequeg.hypixel_enhancer.access.ArmorStandEntityMixinAccess;
 import com.mrqueequeg.hypixel_enhancer.access.EntityMixinAccess;
 import com.mrqueequeg.hypixel_enhancer.access.PlayerEntityMixinAccess;
 import com.mrqueequeg.hypixel_enhancer.config.Config;
@@ -16,6 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.text.Text;
+import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -48,7 +50,7 @@ public class MinecraftClientMixin {
         if (ConfigManager.getConfig().enabled) {
             Config config = ConfigManager.getConfig();
             if (Config.MurderMystery.isActive()) {
-                if (entity instanceof PlayerEntity && ((PlayerEntityMixinAccess)entity).isRealPlayer() && !(!config.murdermystery.highlightSpectators && entity.isSpectator())) {
+                if (entity instanceof PlayerEntity && ((PlayerEntityMixinAccess)entity).isRealPlayer()) {
                     if (config.murdermystery.shouldHighlightMurders() && ((PlayerEntityMixinAccess)entity).isMurder()) {
                         ((EntityMixinAccess)entity).setGlowColor(Config.MurderMystery.murderTeamColorValue);
                         info.setReturnValue(true);
@@ -68,13 +70,9 @@ public class MinecraftClientMixin {
                     }
                 }
                 else if (entity instanceof ArmorStandEntity && config.murdermystery.shouldHighlightBows()) {
-                    ArmorStandEntity armorStandEntity = (ArmorStandEntity) entity;
-                    for (ItemStack heldItem : armorStandEntity.getItemsHand()) {
-                        if (heldItem.getItem() == Items.BOW) {
-                            ((EntityMixinAccess)entity).setGlowColor(Config.MurderMystery.bowTeamColorValue);
-                            info.setReturnValue(true);
-                            break;
-                        }
+                    if (((ArmorStandEntityMixinAccess)entity).isHoldingDetectiveBow()) {
+                        ((EntityMixinAccess)entity).setGlowColor(Config.MurderMystery.bowTeamColorValue);
+                        info.setReturnValue(true);
                     }
                 }
             }

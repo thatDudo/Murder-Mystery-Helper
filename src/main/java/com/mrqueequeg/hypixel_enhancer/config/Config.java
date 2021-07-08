@@ -1,6 +1,7 @@
 package com.mrqueequeg.hypixel_enhancer.config;
 
 import com.google.gson.annotations.Expose;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.item.*;
 import net.minecraft.scoreboard.Team;
 import net.minecraft.text.TranslatableText;
@@ -147,10 +148,10 @@ public class Config {
 
         public static boolean isActive() {
             return currentLobby == HypixelLobbies.MurderMystery;
-//            return true;
         }
 
         public static boolean clientIsMurder = false;
+        public static boolean clientIsDead = false;
         public static ArrayList<UUID> markedMurders = new ArrayList<>();
         public static ArrayList<UUID> markedDetectives = new ArrayList<>();
 
