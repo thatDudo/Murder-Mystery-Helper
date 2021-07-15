@@ -3,6 +3,7 @@ package com.mrqueequeg.hypixel_enhancer;
 import com.mojang.authlib.GameProfile;
 import com.mrqueequeg.hypixel_enhancer.config.Config;
 import com.mrqueequeg.hypixel_enhancer.config.ConfigManager;
+import com.mrqueequeg.hypixel_enhancer.debug.Logger;
 import com.mrqueequeg.hypixel_enhancer.gui.ScreenBuilder;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -17,6 +18,8 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import org.lwjgl.glfw.GLFW;
 
+import java.util.ArrayList;
+
 public class HypixelEnhancer implements ClientModInitializer {
 	private static KeyBinding keyBindingOpenSettings;
 	private static KeyBinding keyToggleEnabled;
@@ -27,6 +30,7 @@ public class HypixelEnhancer implements ClientModInitializer {
 
 	@Override
 	public void onInitializeClient() {
+		Logger.init();
 		ConfigManager.init();
 
 		// adding keybindings to minecraft settings

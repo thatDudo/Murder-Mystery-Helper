@@ -101,7 +101,7 @@ public class ScreenBuilder {
         SubCategoryBuilder subCatMisc = entryBuilder.startSubCategory(new TranslatableText("config.generic.hypixel.murder_mystery.misc.title"));
         subCatMisc.add(toggleMurderMysteryShowNameTags);
 //        subCatMisc.add(toggleMurderMysteryHighlightSpectators);
-        subCatMisc.setExpanded(true);
+        subCatMisc.setExpanded(false);
 
         catGeneric.addEntry(toggleEnabled);
         catGeneric.addEntry(subCatHighlight.build());

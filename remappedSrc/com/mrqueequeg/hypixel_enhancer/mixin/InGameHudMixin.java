@@ -19,8 +19,6 @@ public class InGameHudMixin {
             // Detect if round has ended
             // only works in english
             String s = title.getString().split("\n")[0].toLowerCase();
-//            HypixelEnhancer.printChatMsg(title);
-//            HypixelEnhancer.printChatMsg(Text.of(s));
             if (s.startsWith("you win") || s.startsWith("you lose")) {
                 Config.roundHasEnded = true;
             }
