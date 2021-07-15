@@ -82,12 +82,12 @@ public class ScreenBuilder {
                 .setSaveConsumer(config.murdermystery::setShowNameTags)
                 .build();
 
-//        // highlight spectators
-//        AbstractConfigListEntry<Boolean> toggleMurderMysteryHighlightSpectators = entryBuilder.startBooleanToggle(new TranslatableText("config.generic.hypixel.murder_mystery.misc.highlight_spectators.title"), config.murdermystery.highlightSpectators)
-//                .setDefaultValue(defaults.murdermystery.highlightSpectators)
-//                .setTooltip(new TranslatableText("config.generic.hypixel.murder_mystery.misc.highlight_spectators.tooltip"))
-//                .setSaveConsumer(config.murdermystery::setHighlightSpectators)
-//                .build();
+        // highlight spectators
+        AbstractConfigListEntry<Boolean> toggleMurderMysteryHighlightSpectators = entryBuilder.startBooleanToggle(new TranslatableText("config.generic.hypixel.murder_mystery.misc.highlight_spectators.title"), config.murdermystery.highlightSpectators)
+                .setDefaultValue(defaults.murdermystery.highlightSpectators)
+                .setTooltip(new TranslatableText("config.generic.hypixel.murder_mystery.misc.highlight_spectators.tooltip"))
+                .setSaveConsumer(config.murdermystery::setHighlightSpectators)
+                .build();
 
 
         SubCategoryBuilder subCatHighlight = entryBuilder.startSubCategory(new TranslatableText("config.generic.hypixel.murder_mystery.highlight.title"));
@@ -100,8 +100,8 @@ public class ScreenBuilder {
 
         SubCategoryBuilder subCatMisc = entryBuilder.startSubCategory(new TranslatableText("config.generic.hypixel.murder_mystery.misc.title"));
         subCatMisc.add(toggleMurderMysteryShowNameTags);
-//        subCatMisc.add(toggleMurderMysteryHighlightSpectators);
-        subCatMisc.setExpanded(false);
+        subCatMisc.add(toggleMurderMysteryHighlightSpectators);
+        subCatMisc.setExpanded(true);
 
         catGeneric.addEntry(toggleEnabled);
         catGeneric.addEntry(subCatHighlight.build());

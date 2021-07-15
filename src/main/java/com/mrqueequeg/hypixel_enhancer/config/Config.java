@@ -170,6 +170,7 @@ public class Config {
 
         public static void reset() {
             clientIsMurder = false;
+            clientIsDead = false;
             markedMurders.clear();
             markedDetectives.clear();
         }
@@ -184,7 +185,7 @@ public class Config {
     public enum HypixelLobbies {
         None,
         MurderMystery,
-        MurderMysteryLobby // waiting room
+        MurderMysteryLobby
     }
 
     public static void reset() {
