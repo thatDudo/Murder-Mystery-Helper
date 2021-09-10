@@ -165,7 +165,7 @@ public class Config {
                 Items.SPONGE, Items.BONE, Items.PUMPKIN_PIE, Items.APPLE, Items.BLAZE_ROD, Items.FEATHER,
                 Items.COOKIE, Items.PRISMARINE_SHARD, Items.ROSE_BUSH, Items.OAK_BOAT, Items.GLISTERING_MELON_SLICE,
                 Items.SALMON, Items.SHEARS, Items.REDSTONE_TORCH, Items.DIAMOND_HOE, Items.WOODEN_AXE, Items.DIAMOND_AXE,
-                Items.CARROT_ON_A_STICK
+                Items.CARROT_ON_A_STICK, Items.COOKED_BEEF
         ));
 
         public static void reset() {
