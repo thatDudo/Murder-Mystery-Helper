@@ -161,11 +161,11 @@ public class Config {
         public static final int bowTeamColorValue = 0x21E808;
 
         public static final ArrayList<Item> MURDER_ITEMS = new ArrayList<>(Arrays.asList(
-                Items.STICK, Items.DEAD_BUSH, Items.CARROT, Items.GOLDEN_CARROT, Items.NAME_TAG, Items.GOLDEN_PICKAXE,
-                Items.SPONGE, Items.BONE, Items.PUMPKIN_PIE, Items.APPLE, Items.BLAZE_ROD, Items.FEATHER,
-                Items.COOKIE, Items.PRISMARINE_SHARD, Items.ROSE_BUSH, Items.OAK_BOAT, Items.GLISTERING_MELON_SLICE,
-                Items.SALMON, Items.SHEARS, Items.REDSTONE_TORCH, Items.DIAMOND_HOE, Items.WOODEN_AXE, Items.DIAMOND_AXE,
-                Items.CARROT_ON_A_STICK, Items.COOKED_BEEF
+                Items.IRON_SWORD, Items.ENDER_CHEST, Items.BONE, Items.BLAZE_ROD, Items.CARROT_ON_A_STICK, Items.STONE_SWORD, Items.SPONGE,
+                Items.DEAD_BUSH, Items.OAK_BOAT, Items.GLISTERING_MELON_SLICE, Items.GOLDEN_PICKAXE, Items.COOKED_BEEF, Items.APPLE, Items.PRISMARINE_SHARD,
+                Items.QUARTZ, Items.DIAMOND_SWORD, Items.NAME_TAG, Items.DIAMOND_SHOVEL, Items.ROSE_BUSH, Items.PUMPKIN_PIE, Items.DIAMOND_HOE,
+                Items.CARROT, Items.RED_DYE, Items.SALMON, Items.SHEARS, Items.IRON_SHOVEL, Items.GOLDEN_CARROT, Items.WOODEN_SWORD,
+                Items.STICK, Items.STONE_SHOVEL, Items.COOKIE, Items.DIAMOND_AXE, Items.GOLDEN_SWORD, Items.WOODEN_AXE
         ));
 
         public static void reset() {
