@@ -115,6 +115,6 @@ public class ScreenBuilder {
     }
 
     public static void openConfigScreen(MinecraftClient client) {
-        client.openScreen(buildConfigScreen(client.currentScreen));
+        client.setScreenAndRender(buildConfigScreen(client.currentScreen));
     }
 }
