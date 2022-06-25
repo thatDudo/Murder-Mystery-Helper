@@ -162,11 +162,11 @@ public class Config {
 
         public static final ArrayList<Item> MURDER_ITEMS = new ArrayList<>(Arrays.asList(
                 Items.IRON_SWORD, Items.ENDER_CHEST, Items.COOKED_CHICKEN, Items.BONE, Items.BLAZE_ROD, Items.NETHER_BRICK, Items.CARROT_ON_A_STICK,
-                Items.STONE_SWORD, Items.SPONGE, Items.DEAD_BUSH, Items.OAK_BOAT, Items.GLISTERING_MELON_SLICE, Items.GOLDEN_PICKAXE, Items.COOKED_BEEF,
-                Items.BOOK, Items.APPLE, Items.PRISMARINE_SHARD, Items.QUARTZ, Items.DIAMOND_SWORD, Items.NAME_TAG, Items.DIAMOND_SHOVEL,
-                Items.ROSE_BUSH, Items.PUMPKIN_PIE, Items.DIAMOND_HOE, Items.CARROT, Items.RED_DYE, Items.SALMON, Items.SHEARS,
-                Items.IRON_SHOVEL, Items.GOLDEN_CARROT, Items.WOODEN_SWORD, Items.STICK, Items.STONE_SHOVEL, Items.COOKIE, Items.DIAMOND_AXE,
-                Items.GOLDEN_SWORD, Items.WOODEN_AXE
+                Items.STONE_SWORD, Items.SPONGE, Items.DEAD_BUSH, Items.OAK_BOAT, Items.MUSIC_DISC_BLOCKS, Items.GLISTERING_MELON_SLICE, Items.GOLDEN_PICKAXE,
+                Items.COOKED_BEEF, Items.BOOK, Items.APPLE, Items.PRISMARINE_SHARD, Items.QUARTZ, Items.DIAMOND_SWORD, Items.NAME_TAG,
+                Items.DIAMOND_SHOVEL, Items.ROSE_BUSH, Items.PUMPKIN_PIE, Items.DIAMOND_HOE, Items.CARROT, Items.RED_DYE, Items.SALMON,
+                Items.SHEARS, Items.IRON_SHOVEL, Items.GOLDEN_CARROT, Items.WOODEN_SWORD, Items.STICK, Items.STONE_SHOVEL, Items.COOKIE,
+                Items.DIAMOND_AXE, Items.GOLDEN_SWORD, Items.WOODEN_AXE
         ));
 
         public static void reset() {
