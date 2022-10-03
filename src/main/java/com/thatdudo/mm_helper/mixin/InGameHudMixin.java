@@ -1,8 +1,7 @@
-package com.mrqueequeg.hypixel_enhancer.mixin;
+package com.thatdudo.mm_helper.mixin;
 
-import com.mrqueequeg.hypixel_enhancer.HypixelEnhancer;
-import com.mrqueequeg.hypixel_enhancer.config.Config;
-import com.mrqueequeg.hypixel_enhancer.config.ConfigManager;
+import com.thatdudo.mm_helper.config.Config;
+import com.thatdudo.mm_helper.config.ConfigManager;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;

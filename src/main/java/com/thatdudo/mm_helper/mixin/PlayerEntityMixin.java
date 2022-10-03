@@ -1,17 +1,15 @@
-package com.mrqueequeg.hypixel_enhancer.mixin;
+package com.thatdudo.mm_helper.mixin;
 
 import com.mojang.authlib.GameProfile;
-import com.mrqueequeg.hypixel_enhancer.HypixelEnhancer;
-import com.mrqueequeg.hypixel_enhancer.access.PlayerEntityMixinAccess;
-import com.mrqueequeg.hypixel_enhancer.config.Config;
-import com.mrqueequeg.hypixel_enhancer.config.ConfigManager;
+import com.thatdudo.mm_helper.MMHelper;
+import com.thatdudo.mm_helper.access.PlayerEntityMixinAccess;
+import com.thatdudo.mm_helper.config.Config;
+import com.thatdudo.mm_helper.config.ConfigManager;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.*;
-import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
@@ -70,7 +68,7 @@ public abstract class PlayerEntityMixin implements PlayerEntityMixinAccess {
 
                 // Things which have to be checked regularly
                 PlayerEntity player = (PlayerEntity)(Object)this;
-                _isRealPlayer = !player.isSleeping() && !player.isMainPlayer() && HypixelEnhancer.isPlayerInTabList(player);
+                _isRealPlayer = !player.isSleeping() && !player.isMainPlayer() && MMHelper.isPlayerInTabList(player);
 
                 if ((Config.MurderMystery.clientIsDead || Config.roundHasEnded) && isRealPlayer() && !isDeadSpectator()) {
                     StatusEffectInstance activeInvisibilityEffect = player.getStatusEffect(StatusEffects.INVISIBILITY);
@@ -97,7 +95,7 @@ public abstract class PlayerEntityMixin implements PlayerEntityMixinAccess {
                     }
                     else if (Config.MurderMystery.isMurderItem(heldItem)) {
                         if (!Config.MurderMystery.clientIsMurder) {
-                            HypixelEnhancer.printChatMsg(new TranslatableText("message.murder_mystery.murder_marked", Formatting.RED+((PlayerEntity)(Object)this).getGameProfile().getName()));
+                            MMHelper.printChatMsg(new TranslatableText("message.murder_mystery.murder_marked", Formatting.RED+((PlayerEntity)(Object)this).getGameProfile().getName()));
                         }
                         _isMurder = true;
                         Config.MurderMystery.markedMurders.add(((PlayerEntity)(Object)this).getGameProfile().getId());

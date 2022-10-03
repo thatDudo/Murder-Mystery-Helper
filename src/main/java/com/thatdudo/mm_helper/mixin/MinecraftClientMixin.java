@@ -1,12 +1,11 @@
-package com.mrqueequeg.hypixel_enhancer.mixin;
+package com.thatdudo.mm_helper.mixin;
 
-import com.mrqueequeg.hypixel_enhancer.access.ArmorStandEntityMixinAccess;
-import com.mrqueequeg.hypixel_enhancer.access.EntityMixinAccess;
-import com.mrqueequeg.hypixel_enhancer.access.PlayerEntityMixinAccess;
-import com.mrqueequeg.hypixel_enhancer.config.Config;
-import com.mrqueequeg.hypixel_enhancer.config.ConfigManager;
+import com.thatdudo.mm_helper.access.ArmorStandEntityMixinAccess;
+import com.thatdudo.mm_helper.access.EntityMixinAccess;
+import com.thatdudo.mm_helper.access.PlayerEntityMixinAccess;
+import com.thatdudo.mm_helper.config.Config;
+import com.thatdudo.mm_helper.config.ConfigManager;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.network.ServerInfo;
 import net.minecraft.client.world.ClientWorld;
 import net.minecraft.entity.Entity;

@@ -1,8 +1,8 @@
-package com.mrqueequeg.hypixel_enhancer.config;
+package com.thatdudo.mm_helper.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.mrqueequeg.hypixel_enhancer.HypixelEnhancer;
+import com.thatdudo.mm_helper.MMHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import org.apache.commons.io.FileUtils;
 
@@ -28,7 +28,7 @@ public class ConfigManager {
         }
 
         gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
-        configFile = new File(FabricLoader.getInstance().getConfigDir().toFile(), HypixelEnhancer.MOD_ID +".json");
+        configFile = new File(FabricLoader.getInstance().getConfigDir().toFile(), MMHelper.MOD_ID +".json");
         readConfig(false);
 
         initialized = true;

@@ -1,8 +1,8 @@
-package com.mrqueequeg.hypixel_enhancer.gui;
+package com.thatdudo.mm_helper.gui;
 
-import com.mrqueequeg.hypixel_enhancer.HypixelEnhancer;
-import com.mrqueequeg.hypixel_enhancer.config.Config;
-import com.mrqueequeg.hypixel_enhancer.config.ConfigManager;
+import com.thatdudo.mm_helper.MMHelper;
+import com.thatdudo.mm_helper.config.Config;
+import com.thatdudo.mm_helper.config.ConfigManager;
 import me.shedaniel.clothconfig2.api.AbstractConfigListEntry;
 import me.shedaniel.clothconfig2.api.ConfigBuilder;
 import me.shedaniel.clothconfig2.api.ConfigCategory;
@@ -35,7 +35,7 @@ public class ScreenBuilder {
         AbstractConfigListEntry<Boolean> toggleEnabled = entryBuilder.startBooleanToggle(new TranslatableText("config.generic.enabled.title"), config.enabled)
                 .setDefaultValue(defaults.enabled)
                 .setTooltip(new TranslatableText("config.generic.enabled.tooltip"))
-                .setSaveConsumer(HypixelEnhancer::setModEnabled)
+                .setSaveConsumer(MMHelper::setModEnabled)
                 .build();
 
         // highlight innocents

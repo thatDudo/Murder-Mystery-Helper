@@ -1,10 +1,8 @@
-package com.mrqueequeg.hypixel_enhancer.mixin;
+package com.thatdudo.mm_helper.mixin;
 
-import com.mrqueequeg.hypixel_enhancer.HypixelEnhancer;
-import com.mrqueequeg.hypixel_enhancer.config.Config;
+import com.thatdudo.mm_helper.config.Config;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.network.packet.s2c.play.PlayerAbilitiesS2CPacket;
-import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;

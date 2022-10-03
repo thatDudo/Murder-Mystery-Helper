@@ -1,8 +1,8 @@
-package com.mrqueequeg.hypixel_enhancer.mixin;
+package com.thatdudo.mm_helper.mixin;
 
-import com.mrqueequeg.hypixel_enhancer.access.PlayerEntityMixinAccess;
-import com.mrqueequeg.hypixel_enhancer.config.Config;
-import com.mrqueequeg.hypixel_enhancer.config.ConfigManager;
+import com.thatdudo.mm_helper.access.PlayerEntityMixinAccess;
+import com.thatdudo.mm_helper.config.Config;
+import com.thatdudo.mm_helper.config.ConfigManager;
 import net.minecraft.client.render.entity.LivingEntityRenderer;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;

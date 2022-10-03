@@ -1,4 +1,4 @@
-package com.mrqueequeg.hypixel_enhancer.access;
+package com.thatdudo.mm_helper.access;
 
 public interface ArmorStandEntityMixinAccess {
 

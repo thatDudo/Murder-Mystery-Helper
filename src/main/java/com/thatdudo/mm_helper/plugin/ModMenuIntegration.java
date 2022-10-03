@@ -1,6 +1,6 @@
-package com.mrqueequeg.hypixel_enhancer.plugin;
+package com.thatdudo.mm_helper.plugin;
 
-import com.mrqueequeg.hypixel_enhancer.gui.ScreenBuilder;
+import com.thatdudo.mm_helper.gui.ScreenBuilder;
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
 import net.fabricmc.api.EnvType;

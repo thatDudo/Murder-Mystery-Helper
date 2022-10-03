@@ -1,9 +1,9 @@
-package com.mrqueequeg.hypixel_enhancer;
+package com.thatdudo.mm_helper;
 
 import com.mojang.authlib.GameProfile;
-import com.mrqueequeg.hypixel_enhancer.config.Config;
-import com.mrqueequeg.hypixel_enhancer.config.ConfigManager;
-import com.mrqueequeg.hypixel_enhancer.gui.ScreenBuilder;
+import com.thatdudo.mm_helper.config.Config;
+import com.thatdudo.mm_helper.config.ConfigManager;
+import com.thatdudo.mm_helper.gui.ScreenBuilder;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
@@ -17,13 +17,12 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import org.lwjgl.glfw.GLFW;
 
-public class HypixelEnhancer implements ClientModInitializer {
+public class MMHelper implements ClientModInitializer {
 	private static KeyBinding keyBindingOpenSettings;
 	private static KeyBinding keyToggleEnabled;
 
-	public static final String MOD_ID = "hypixel_enhancer";
+	public static final String MOD_ID = "mm_helper";
 	public static final String MOD_NAME = "Murder Mystery Helper";
-	public static final String CHAT_TAG = "[Murder Mystery Helper] ";
 
 	@Override
 	public void onInitializeClient() {

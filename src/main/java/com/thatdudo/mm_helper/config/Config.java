@@ -1,11 +1,8 @@
-package com.mrqueequeg.hypixel_enhancer.config;
+package com.thatdudo.mm_helper.config;
 
 import com.google.gson.annotations.Expose;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.item.*;
-import net.minecraft.scoreboard.Team;
 import net.minecraft.text.TranslatableText;
-import net.minecraft.util.Formatting;
 
 import java.util.ArrayList;
 import java.util.Arrays;
