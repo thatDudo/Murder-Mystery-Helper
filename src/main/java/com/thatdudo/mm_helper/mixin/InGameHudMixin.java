@@ -1,7 +1,6 @@
 package com.thatdudo.mm_helper.mixin;
 
-import com.thatdudo.mm_helper.config.Config;
-import com.thatdudo.mm_helper.config.ConfigManager;
+import com.thatdudo.mm_helper.MMHelper;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,14 +13,11 @@ public class InGameHudMixin {
 
     @Inject(at = @At("RETURN"), method = "setTitle")
     private void onSetTitle(Text title, CallbackInfo info) {
-        if (ConfigManager.getConfig().enabled) {
-            // Detect if round has ended
-            // only works in english
+        if (MMHelper.isEnabled()) {
+            // Detect if round has ended (only works in english)
             String s = title.getString().split("\n")[0].toLowerCase();
-//            HypixelEnhancer.printChatMsg(title);
-//            HypixelEnhancer.printChatMsg(Text.of(s));
             if (s.startsWith("you win") || s.startsWith("you lose")) {
-                Config.roundHasEnded = true;
+                MMHelper.roundHasEnded = true;
             }
         }
     }

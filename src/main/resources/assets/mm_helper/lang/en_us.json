@@ -7,9 +7,9 @@
   "message.murder_mystery.murder_marked": "Found Murder: %s",
   "message.murder_mystery.starting_murder_mode": "Murder Help Activated",
 
-  "key.category.hypixel_enhancer": "Murder Mystery Mod",
-  "key.hypixel_enhancer.settings": "Open Settings",
-  "key.hypixel_enhancer.enable": "Toggle Enabled",
+  "key.category.mm_helper": "Murder Mystery Mod",
+  "key.mm_helper.enable": "Toggle Enabled",
+  "key.mm_helper.settings": "Open Settings",
 
   "config.generic.title": "Generic",
   "config.generic.enabled.title": "Enabled",

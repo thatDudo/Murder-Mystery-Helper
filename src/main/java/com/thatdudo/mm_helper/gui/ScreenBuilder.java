@@ -51,14 +51,14 @@ public class ScreenBuilder {
                 .setDefaultValue(defaults.murdermystery.detectiveHighlightOptions)
 //                .setTooltip(new TranslatableText(""))
                 .setEnumNameProvider((e) -> ((Config.MurderMystery.DetectiveHighlightOptions)e).getText())
-                .setSaveConsumer(config.murdermystery::setDetectiveHighlightOptions)
+                .setSaveConsumer(MMHelper::setDetectiveHighlightOptions)
                 .build();
 
         // highlight murders
         AbstractConfigListEntry<Boolean> toggleMurderMysteryHighlightMurders = entryBuilder.startBooleanToggle(new TranslatableText("config.generic.hypixel.murder_mystery.highlight.murder.title"), config.murdermystery.highlightMurders)
                 .setDefaultValue(defaults.murdermystery.highlightMurders)
                 .setTooltip(new TranslatableText("config.generic.hypixel.murder_mystery.highlight.murder.tooltip"))
-                .setSaveConsumer(config.murdermystery::setHighlightMurders)
+                .setSaveConsumer(MMHelper::setHighlightMurders)
                 .build();
 
         // highlight gold

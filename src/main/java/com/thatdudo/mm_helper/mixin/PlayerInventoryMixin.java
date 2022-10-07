@@ -1,7 +1,7 @@
 package com.thatdudo.mm_helper.mixin;
 
+import com.thatdudo.mm_helper.MMHelper;
 import com.thatdudo.mm_helper.config.Config;
-import com.thatdudo.mm_helper.config.ConfigManager;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -14,15 +14,11 @@ public class PlayerInventoryMixin {
 
     @Inject(at = @At("HEAD"), method = "setStack")
     private void onSetStack(int slot, ItemStack stack, CallbackInfo info) {
-        if (ConfigManager.getConfig().enabled) {
-            if (Config.MurderMystery.isActive() && !Config.MurderMystery.clientIsMurder) {
-                // If player gets murder item set isMurder to true
-                if (stack.hasCustomName()) {
-                    //if (stack.getName().getString().equals("Knife")) {
-                    if (Config.MurderMystery.isMurderItem(stack.getItem())) {
-//                        HypixelEnhancer.printChatMsg(new TranslatableText("message.murder_mystery.starting_murder_mode").formatted(Formatting.RED));
-                        Config.MurderMystery.clientIsMurder = true;
-                    }
+        if (MMHelper.isActive() && !MMHelper.clientIsMurder) {
+            if (stack.hasCustomName()) {
+                if (Config.MurderMystery.isMurderItem(stack.getItem())) {
+//                    MMHelper.printChatMsg(new TranslatableText("message.murder_mystery.starting_murder_mode").formatted(Formatting.RED));
+                    MMHelper.clientIsMurder = true;
                 }
             }
         }

@@ -1,5 +1,6 @@
 package com.thatdudo.mm_helper.mixin;
 
+import com.thatdudo.mm_helper.MMHelper;
 import com.thatdudo.mm_helper.access.EntityMixinAccess;
 import com.thatdudo.mm_helper.config.Config;
 import com.thatdudo.mm_helper.config.ConfigManager;
@@ -23,12 +24,9 @@ public abstract class EntityMixin implements EntityMixinAccess {
 
     @Inject(at = @At("HEAD"), method = "getTeamColorValue", cancellable = true)
     private void onGetTeamColorValue(CallbackInfoReturnable<Integer> info) {
-        if (ConfigManager.getConfig().enabled) {
-            Config config = ConfigManager.getConfig();
-            if (Config.MurderMystery.isActive()) {
-                if (glowColor >= 0) {
-                    info.setReturnValue(glowColor);
-                }
+        if (MMHelper.isActive()) {
+            if (glowColor >= 0) {
+                info.setReturnValue(glowColor);
             }
         }
     }

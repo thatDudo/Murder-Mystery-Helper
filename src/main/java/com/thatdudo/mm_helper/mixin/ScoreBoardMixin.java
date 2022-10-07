@@ -1,5 +1,6 @@
 package com.thatdudo.mm_helper.mixin;
 
+import com.thatdudo.mm_helper.MMHelper;
 import com.thatdudo.mm_helper.config.Config;
 import com.thatdudo.mm_helper.config.ConfigManager;
 import net.minecraft.scoreboard.Scoreboard;
@@ -17,16 +18,15 @@ public class ScoreBoardMixin {
     @Inject(at = @At("HEAD"), method = "addObjective")
     private void onAddObjective(String name, ScoreboardCriterion criterion2, Text displayName, ScoreboardCriterion.RenderType renderType, CallbackInfoReturnable<ScoreboardObjective> info) {
         // Used for detecting active mini-game
-        if (ConfigManager.getConfig().enabled && Config.onHypixelServer) {
+        if (MMHelper.onHypixelServer) {
             String displayNameString = displayName.getString();
-//            HypixelEnhancer.printChatMsg(Text.of(Formatting.GREEN+name+": "+displayNameString));
+//            MMHelper.printChatMsg(Text.of(Formatting.GREEN+name+": "+displayNameString));
             if (displayNameString.equalsIgnoreCase("murder mystery")) {
                 if (name.equalsIgnoreCase("prescoreboard") || name.equalsIgnoreCase("mmlobby")) {
-                    Config.currentLobby = Config.HypixelLobbies.MurderMysteryLobby;
+                    MMHelper.setCurrentLobby(MMHelper.HypixelLobbies.MurderMysteryLobby);
                 }
-                else if (Config.currentLobby != Config.HypixelLobbies.MurderMystery && name.equalsIgnoreCase("murdermystery")) {
-                    Config.resetLobby(Config.HypixelLobbies.MurderMystery);
-                    Config.currentLobby = Config.HypixelLobbies.MurderMystery;
+                else if (MMHelper.currentLobby != MMHelper.HypixelLobbies.MurderMystery && name.equalsIgnoreCase("murdermystery")) {
+                    MMHelper.setCurrentLobby(MMHelper.HypixelLobbies.MurderMystery);
                 }
             }
         }

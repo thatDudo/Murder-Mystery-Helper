@@ -17,12 +17,32 @@ import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import org.lwjgl.glfw.GLFW;
 
+import java.util.ArrayList;
+import java.util.UUID;
+
 public class MMHelper implements ClientModInitializer {
 	private static KeyBinding keyBindingOpenSettings;
 	private static KeyBinding keyToggleEnabled;
 
 	public static final String MOD_ID = "mm_helper";
 	public static final String MOD_NAME = "Murder Mystery Helper";
+
+	public static boolean onHypixelServer = false;
+	public static HypixelLobbies currentLobby = HypixelLobbies.None;
+	public static boolean roundHasEnded = false;
+
+	public static boolean isEnabled() {
+		return ConfigManager.getConfig().enabled;
+	}
+
+	public static boolean isActive() {
+		return isEnabled() && currentLobby == HypixelLobbies.MurderMystery;
+	}
+
+	public static boolean clientIsMurder = false;
+	public static boolean clientIsDead = false;
+	public static ArrayList<UUID> markedMurders = new ArrayList<>();
+	public static ArrayList<UUID> markedDetectives = new ArrayList<>();
 
 	@Override
 	public void onInitializeClient() {
@@ -66,6 +86,51 @@ public class MMHelper implements ClientModInitializer {
 		Config config = ConfigManager.getConfig();
 		if (state != config.enabled) {
 			config.enabled = state;
+		}
+	}
+
+	public static void setHighlightMurders(boolean state) {
+		Config config = ConfigManager.getConfig();
+		if (config.murdermystery.highlightMurders != state) {
+			config.murdermystery.highlightMurders = state;
+			if (!state) {
+				markedMurders.clear();
+			}
+		}
+	}
+
+	public static void setDetectiveHighlightOptions(Config.MurderMystery.DetectiveHighlightOptions state) {
+		Config config = ConfigManager.getConfig();
+		if (config.murdermystery.detectiveHighlightOptions != state) {
+			config.murdermystery.detectiveHighlightOptions = state;
+			if (!config.murdermystery.shouldHighlightDetectives(clientIsMurder)) {
+				markedDetectives.clear();
+			}
+		}
+	}
+
+	public enum HypixelLobbies {
+		None,
+		MurderMystery,
+		MurderMysteryLobby
+	}
+
+	public static void setCurrentLobby(HypixelLobbies lobby) {
+		resetLobby(currentLobby);
+		currentLobby = lobby;
+	}
+
+	/**
+	 * Reset configurations
+	 * @param lobby Lobby from which the config is to be reseted
+	 */
+	public static void resetLobby(HypixelLobbies lobby) {
+		if (lobby == HypixelLobbies.MurderMystery) {
+			roundHasEnded = false;
+			clientIsMurder = false;
+			clientIsDead = false;
+			markedMurders.clear();
+			markedDetectives.clear();
 		}
 	}
 

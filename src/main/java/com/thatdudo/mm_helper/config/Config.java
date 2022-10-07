@@ -16,9 +16,9 @@ public class Config {
     @Expose public boolean enabled = true;
     @Expose public MurderMystery murdermystery = new MurderMystery();
 
-    public static boolean onHypixelServer = false;
-    public static HypixelLobbies currentLobby = HypixelLobbies.None;
-    public static boolean roundHasEnded = false;
+//    public static boolean onHypixelServer = false;
+//    public static HypixelLobbies currentLobby = HypixelLobbies.None;
+//    public static boolean roundHasEnded = false;
 
     public static final class MurderMystery {
         @Expose public boolean highlightMurders = true;
@@ -30,14 +30,14 @@ public class Config {
         @Expose public boolean showNameTags = false;
         @Expose public boolean highlightSpectators = false;
 
-        public void setHighlightMurders(boolean state) {
-            if (highlightMurders != state) {
-                if (!state) {
-                    markedMurders.clear();
-                }
-                highlightMurders = state;
-            }
-        }
+//        public void setHighlightMurders(boolean state) {
+//            if (highlightMurders != state) {
+//                if (!state) {
+//                    markedMurders.clear();
+//                }
+//                highlightMurders = state;
+//            }
+//        }
 
         public void setInnocentHighlightOptions(InnocentHighlightOptions state) {
             innocentHighlightOptions = state;
@@ -55,24 +55,24 @@ public class Config {
             highlightBows = state;
         }
 
-        public void setDetectiveHighlightOptions(DetectiveHighlightOptions state) {
-            if (detectiveHighlightOptions != state) {
-                detectiveHighlightOptions = state;
-                if (!shouldHighlightDetectives()) {
-                    markedDetectives.clear();
-                }
-            }
-        }
+//        public void setDetectiveHighlightOptions(DetectiveHighlightOptions state) {
+//            if (detectiveHighlightOptions != state) {
+//                detectiveHighlightOptions = state;
+//                if (!shouldHighlightDetectives()) {
+//                    markedDetectives.clear();
+//                }
+//            }
+//        }
 
         public void setHighlightSpectators(boolean state) {
             highlightSpectators = state;
         }
 
-        public boolean shouldHighlightInnocents() {
+        public boolean shouldHighlightInnocents(boolean clientIsMurder) {
             return innocentHighlightOptions == InnocentHighlightOptions.ALWAYS || (innocentHighlightOptions == InnocentHighlightOptions.AS_MURDER && clientIsMurder);
         }
 
-        public boolean shouldHighlightDetectives() {
+        public boolean shouldHighlightDetectives(boolean clientIsMurder) {
             return detectiveHighlightOptions == DetectiveHighlightOptions.ALWAYS || (detectiveHighlightOptions == DetectiveHighlightOptions.AS_MURDER && clientIsMurder);
         }
 
@@ -143,14 +143,14 @@ public class Config {
             }
         };
 
-        public static boolean isActive() {
-            return currentLobby == HypixelLobbies.MurderMystery;
-        }
-
-        public static boolean clientIsMurder = false;
-        public static boolean clientIsDead = false;
-        public static ArrayList<UUID> markedMurders = new ArrayList<>();
-        public static ArrayList<UUID> markedDetectives = new ArrayList<>();
+//        public static boolean isActive() {
+//            return currentLobby == HypixelLobbies.MurderMystery;
+//        }
+//
+//        public static boolean clientIsMurder = false;
+//        public static boolean clientIsDead = false;
+//        public static ArrayList<UUID> markedMurders = new ArrayList<>();
+//        public static ArrayList<UUID> markedDetectives = new ArrayList<>();
 
         public static final int murderTeamColorValue = 0xFF1111;
         public static final int detectiveTeamColorValue = 0x15BFD6;
@@ -159,48 +159,49 @@ public class Config {
 
         public static final ArrayList<Item> MURDER_ITEMS = new ArrayList<>(Arrays.asList(
                 Items.IRON_SWORD, Items.ENDER_CHEST, Items.COOKED_CHICKEN, Items.BONE, Items.BLAZE_ROD, Items.NETHER_BRICK, Items.CARROT_ON_A_STICK,
-                Items.STONE_SWORD, Items.SPONGE, Items.DEAD_BUSH, Items.OAK_BOAT, Items.MUSIC_DISC_BLOCKS, Items.GLISTERING_MELON_SLICE, Items.GOLDEN_PICKAXE,
+                Items.STONE_SWORD, Items.SPONGE, Items.DEAD_BUSH, Items.OAK_BOAT, Items.GLISTERING_MELON_SLICE, Items.GOLDEN_PICKAXE,
                 Items.COOKED_BEEF, Items.BOOK, Items.APPLE, Items.PRISMARINE_SHARD, Items.QUARTZ, Items.DIAMOND_SWORD, Items.NAME_TAG,
                 Items.DIAMOND_SHOVEL, Items.ROSE_BUSH, Items.PUMPKIN_PIE, Items.DIAMOND_HOE, Items.CARROT, Items.RED_DYE, Items.SALMON,
                 Items.SHEARS, Items.IRON_SHOVEL, Items.GOLDEN_CARROT, Items.WOODEN_SWORD, Items.STICK, Items.STONE_SHOVEL, Items.COOKIE,
                 Items.DIAMOND_AXE, Items.GOLDEN_SWORD, Items.WOODEN_AXE
         ));
 
-        public static void reset() {
-            clientIsMurder = false;
-            clientIsDead = false;
-            markedMurders.clear();
-            markedDetectives.clear();
-        }
+//        public static void reset() {
+//            clientIsMurder = false;
+//            clientIsDead = false;
+//            markedMurders.clear();
+//            markedDetectives.clear();
+//        }
 
         public static boolean isMurderItem(Item item) {
             return item instanceof SwordItem
                     || (item instanceof ShovelItem && item != Items.WOODEN_SHOVEL)
+                    || (item instanceof MusicDiscItem)
                     || MURDER_ITEMS.contains(item);
         }
     }
 
-    public enum HypixelLobbies {
-        None,
-        MurderMystery,
-        MurderMysteryLobby
-    }
-
-    public static void reset() {
-        roundHasEnded = false;
-        resetLobby(currentLobby);
-        currentLobby = HypixelLobbies.None;
-    }
-
-    /**
-     * Reset configurations
-     * @param lobby Lobby from which the config is to be reseted
-     */
-    public static void resetLobby(HypixelLobbies lobby) {
-        if (lobby == HypixelLobbies.MurderMystery) {
-            MurderMystery.reset();
-        }
-    }
+//    public enum HypixelLobbies {
+//        None,
+//        MurderMystery,
+//        MurderMysteryLobby
+//    }
+//
+//    public static void reset() {
+//        roundHasEnded = false;
+//        resetLobby(currentLobby);
+//        currentLobby = HypixelLobbies.None;
+//    }
+//
+//    /**
+//     * Reset configurations
+//     * @param lobby Lobby from which the config is to be reseted
+//     */
+//    public static void resetLobby(HypixelLobbies lobby) {
+//        if (lobby == HypixelLobbies.MurderMystery) {
+//            MurderMystery.reset();
+//        }
+//    }
 
     /**
      * @return true if nothing was changed

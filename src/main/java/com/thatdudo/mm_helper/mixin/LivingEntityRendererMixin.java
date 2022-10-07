@@ -1,5 +1,6 @@
 package com.thatdudo.mm_helper.mixin;
 
+import com.thatdudo.mm_helper.MMHelper;
 import com.thatdudo.mm_helper.access.PlayerEntityMixinAccess;
 import com.thatdudo.mm_helper.config.Config;
 import com.thatdudo.mm_helper.config.ConfigManager;
@@ -14,14 +15,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(LivingEntityRenderer.class)
 public class LivingEntityRendererMixin {
 
-    @Inject(at = @At("HEAD"), method = "hasLabel", cancellable = true)
+    @Inject(at = @At("HEAD"), method = "hasLabel(Lnet/minecraft/entity/LivingEntity;)Z", cancellable = true)
     public void onShouldRenderName(LivingEntity livingEntity, CallbackInfoReturnable<Boolean> info) {
-        if (ConfigManager.getConfig().enabled) {
-            Config config = ConfigManager.getConfig();
-            if (Config.MurderMystery.isActive() && config.murdermystery.shouldShowNameTags()) {
-                if (livingEntity instanceof PlayerEntity && ((PlayerEntityMixinAccess)livingEntity).isRealPlayer()) {
-                    info.setReturnValue(true);
-                }
+        if (MMHelper.isActive() && ConfigManager.getConfig().murdermystery.shouldShowNameTags()) {
+            if (livingEntity instanceof PlayerEntity && ((PlayerEntityMixinAccess)livingEntity).isRealPlayer()) {
+                info.setReturnValue(true);
             }
         }
     }
