@@ -11,9 +11,9 @@ The mod is not detectable but you should not consistently write the murders name
 
 ###### This mod runs on Fabric and requires the Fabric API: [How to install](https://fabricmc.net/ "How to install")
 
-#### Download Link: **[1.18.2](https://github.com/thatDudo/Murder-Mystery-Helper/releases/download/1.0.8%2B1.18.2/murdermystery-fabric-mc1.18.2-1.0.8.jar)**
+#### Download Link: **[1.18.2](https://github.com/thatDudo/Murder-Mystery-Helper/releases/download/1.0.8%2B1.18.2/murdermysteryhelper-fabric-mc1.18.2-1.0.8.jar)**
 
-![2022-01-19_23 00 30_2](https://user-images.githubusercontent.com/58403773/150222740-3ed992de-bfbc-4d72-b5df-7b64d898faac.png)
+![2022-10-07_17 18 50](https://user-images.githubusercontent.com/58403773/194589741-3c1c5ef9-48ab-46cc-883d-c87633fcf854.png)
 
 ![2022-01-19_23 27 38](https://user-images.githubusercontent.com/58403773/150229000-fcfc6135-ca5f-417d-a4d2-a2535b1d95ef.png)
 
