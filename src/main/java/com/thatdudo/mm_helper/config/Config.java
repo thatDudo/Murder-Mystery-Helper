@@ -15,10 +15,9 @@ public class Config {
     public static final class MurderMystery {
         @Expose public boolean highlightMurders = true;
         @Expose public InnocentHighlightOptions innocentHighlightOptions = InnocentHighlightOptions.AS_MURDER;
-        @Expose public DetectiveHighlightOptions detectiveHighlightOptions = DetectiveHighlightOptions.NEVER;
-        @Expose public boolean highlightGold = false;
-        @Expose public boolean highlightBows = false;
-
+        @Expose public DetectiveHighlightOptions detectiveHighlightOptions = DetectiveHighlightOptions.ALWAYS;
+        @Expose public boolean highlightGold = true;
+        @Expose public boolean highlightBows = true;
         @Expose public boolean showNameTags = false;
         @Expose public boolean highlightSpectators = false;
 
