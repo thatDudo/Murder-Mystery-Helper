@@ -1,13 +1,13 @@
 {
-  "title": "Murder Mystery Mod",
-  "config.title": "Murder Mystery Mod",
+  "title": "Murder Mystery Helper",
+  "config.title": "Murder Mystery Helper",
 
   "message.enabled": "%s enabled",
   "message.disabled": "%s disabled",
   "message.murder_mystery.murder_marked": "Found Murder: %s",
   "message.murder_mystery.starting_murder_mode": "Murder Help Activated",
 
-  "key.category.mm_helper": "Murder Mystery Mod",
+  "key.category.mm_helper": "Murder Mystery Helper",
   "key.mm_helper.enable": "Toggle Enabled",
   "key.mm_helper.settings": "Open Settings",
 

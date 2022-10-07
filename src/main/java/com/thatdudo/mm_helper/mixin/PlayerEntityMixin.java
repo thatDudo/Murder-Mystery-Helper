@@ -4,6 +4,8 @@ import com.mojang.authlib.GameProfile;
 import com.thatdudo.mm_helper.MMHelper;
 import com.thatdudo.mm_helper.access.PlayerEntityMixinAccess;
 import com.thatdudo.mm_helper.config.Config;
+import com.thatdudo.mm_helper.config.ConfigManager;
+import com.thatdudo.mm_helper.util.MinecraftUtils;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
@@ -65,7 +67,7 @@ public abstract class PlayerEntityMixin implements PlayerEntityMixinAccess {
     private void onTick(CallbackInfo info) {
         if (MMHelper.isActive()) {
             PlayerEntity player = (PlayerEntity)(Object)this;
-            this._isRealPlayer = !player.isSleeping() && !player.isMainPlayer() && MMHelper.isPlayerInTabList(player);
+            this._isRealPlayer = !player.isSleeping() && !player.isMainPlayer() && MinecraftUtils.isPlayerInTabList(player);
 
             if ((MMHelper.clientIsDead || MMHelper.roundHasEnded) && isRealPlayer() && !isDeadSpectator()) {
                 StatusEffectInstance activeInvisibilityEffect = player.getStatusEffect(StatusEffects.INVISIBILITY);
@@ -86,9 +88,9 @@ public abstract class PlayerEntityMixin implements PlayerEntityMixinAccess {
                     _hasBow = true;
                     MMHelper.markedDetectives.add(((PlayerEntity)(Object)this).getGameProfile().getId());
                 }
-                else if (Config.MurderMystery.isMurderItem(heldItem)) {
+                else if (ConfigManager.getConfig().murdermystery.isMurderItem(heldItem)) {
                     if (!MMHelper.clientIsMurder) {
-                        MMHelper.printChatMsg(new TranslatableText("message.murder_mystery.murder_marked", Formatting.RED+((PlayerEntity)(Object)this).getGameProfile().getName()));
+                        MinecraftUtils.printChatMsg(new TranslatableText("message.murder_mystery.murder_marked", Formatting.RED+((PlayerEntity)(Object)this).getGameProfile().getName()));
                     }
                     _isMurder = true;
                     MMHelper.markedMurders.add(((PlayerEntity)(Object)this).getGameProfile().getId());

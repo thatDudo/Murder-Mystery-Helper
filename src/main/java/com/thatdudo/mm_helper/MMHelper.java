@@ -1,18 +1,15 @@
 package com.thatdudo.mm_helper;
 
-import com.mojang.authlib.GameProfile;
 import com.thatdudo.mm_helper.config.Config;
 import com.thatdudo.mm_helper.config.ConfigManager;
 import com.thatdudo.mm_helper.gui.ScreenBuilder;
+import com.thatdudo.mm_helper.util.MurderItemsFetcher;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import org.lwjgl.glfw.GLFW;
@@ -52,6 +49,7 @@ public class MMHelper implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
 		ConfigManager.init();
+		MurderItemsFetcher.fetchAndUpdate();
 
 		// adding keybindings to minecraft settings
 		keyBindingOpenSettings = KeyBindingHelper.registerKeyBinding(new KeyBinding(
@@ -75,12 +73,12 @@ public class MMHelper implements ClientModInitializer {
 		}
 		else if (keyToggleEnabled.wasPressed()) {
 			if (client.player != null) {
-				if (ConfigManager.getConfig().enabled) {
-					ConfigManager.getConfig().enabled = false;
+				if (isEnabled()) {
+					setModEnabled(false);
 					client.player.sendMessage(new TranslatableText("message.disabled", MOD_NAME).formatted(Formatting.RED), true);
 				}
 				else {
-					ConfigManager.getConfig().enabled = true;
+					setModEnabled(true);
 					client.player.sendMessage(new TranslatableText("message.enabled", MOD_NAME).formatted(Formatting.GREEN), true);
 				}
 			}
@@ -131,28 +129,5 @@ public class MMHelper implements ClientModInitializer {
 			markedMurders.clear();
 			markedDetectives.clear();
 		}
-	}
-
-	public static void printChatMsg(Text msg) {
-		if (MinecraftClient.getInstance() != null && MinecraftClient.getInstance().inGameHud != null) {
-			MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(msg);
-		}
-	}
-
-	public static boolean isPlayerInTabList(PlayerEntity player) {
-		return isPlayerInTabList(player.getGameProfile());
-	}
-
-	public static boolean isPlayerInTabList(GameProfile profile) {
-		// ids of players are sometimes different from this player list but using names works
-		if (MinecraftClient.getInstance().player != null) {
-			String name = profile.getName();
-			for (PlayerListEntry entry : MinecraftClient.getInstance().player.networkHandler.getPlayerList()) {
-				if (entry.getProfile().getName().equals(name)) {
-					return true;
-				}
-			}
-		}
-		return false;
 	}
 }

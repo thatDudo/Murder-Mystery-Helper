@@ -17,9 +17,9 @@ public class ConfigManager {
     private static Config config = null;
     private static final Config defaults = new Config();
 
-    private static Gson gson;
     private static File configFile;
 
+    private static final Gson gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
     private static final Executor executor = Executors.newSingleThreadExecutor();
 
     public static void init() {
@@ -27,7 +27,6 @@ public class ConfigManager {
             return;
         }
 
-        gson = new GsonBuilder().setPrettyPrinting().excludeFieldsWithoutExposeAnnotation().create();
         configFile = new File(FabricLoader.getInstance().getConfigDir().toFile(), MMHelper.MOD_ID +".json");
         readConfig(false);
 

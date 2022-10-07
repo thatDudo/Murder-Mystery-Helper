@@ -20,6 +20,7 @@ public class Config {
         @Expose public boolean highlightBows = true;
         @Expose public boolean showNameTags = false;
         @Expose public boolean highlightSpectators = false;
+        @Expose public ArrayList<Integer> murderItems = getDefaultMurderItemsIds();
 
         public void setInnocentHighlightOptions(InnocentHighlightOptions state) {
             innocentHighlightOptions = state;
@@ -69,6 +70,13 @@ public class Config {
             return highlightSpectators;
         }
 
+        public boolean isMurderItem(Item item) {
+            return item instanceof SwordItem
+                    || (item instanceof ShovelItem && item != Items.WOODEN_SHOVEL)
+                    || (item instanceof MusicDiscItem)
+                    || murderItems.contains(Item.getRawId(item));
+        }
+
         public boolean validate() {
             boolean valid = true;
 
@@ -98,7 +106,7 @@ public class Config {
             public TranslatableText getText() {
                 return this.text;
             }
-        };
+        }
 
         public enum DetectiveHighlightOptions {
             NEVER(new TranslatableText("config.generic.hypixel.murder_mystery.highlight.detective.option.never")),
@@ -121,7 +129,7 @@ public class Config {
         public static final int goldTeamColorValue = 0xFFF126;
         public static final int bowTeamColorValue = 0x21E808;
 
-        public static final ArrayList<Item> MURDER_ITEMS = new ArrayList<>(Arrays.asList(
+        public static final ArrayList<Item> DEFAULT_MURDER_ITEMS = new ArrayList<>(Arrays.asList(
                 Items.IRON_SWORD, Items.ENDER_CHEST, Items.COOKED_CHICKEN, Items.BONE, Items.BLAZE_ROD, Items.NETHER_BRICK, Items.CARROT_ON_A_STICK,
                 Items.STONE_SWORD, Items.SPONGE, Items.DEAD_BUSH, Items.OAK_BOAT, Items.GLISTERING_MELON_SLICE, Items.GOLDEN_PICKAXE,
                 Items.COOKED_BEEF, Items.BOOK, Items.APPLE, Items.PRISMARINE_SHARD, Items.QUARTZ, Items.DIAMOND_SWORD, Items.NAME_TAG,
@@ -130,11 +138,12 @@ public class Config {
                 Items.DIAMOND_AXE, Items.GOLDEN_SWORD, Items.WOODEN_AXE
         ));
 
-        public static boolean isMurderItem(Item item) {
-            return item instanceof SwordItem
-                    || (item instanceof ShovelItem && item != Items.WOODEN_SHOVEL)
-                    || (item instanceof MusicDiscItem)
-                    || MURDER_ITEMS.contains(item);
+        public ArrayList<Integer> getDefaultMurderItemsIds() {
+            ArrayList<Integer> ids = new ArrayList<>();
+            for (Item item : DEFAULT_MURDER_ITEMS) {
+                ids.add(Item.getRawId(item));
+            }
+            return ids;
         }
     }
 
