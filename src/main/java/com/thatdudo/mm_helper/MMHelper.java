@@ -28,6 +28,11 @@ public class MMHelper implements ClientModInitializer {
 	public static final String MOD_NAME = "Murder Mystery Helper";
 
 	public static boolean onHypixelServer = false;
+	public enum HypixelLobbies {
+		None,
+		MurderMystery,
+		MurderMysteryLobby
+	}
 	public static HypixelLobbies currentLobby = HypixelLobbies.None;
 	public static boolean roundHasEnded = false;
 
@@ -109,12 +114,6 @@ public class MMHelper implements ClientModInitializer {
 		}
 	}
 
-	public enum HypixelLobbies {
-		None,
-		MurderMystery,
-		MurderMysteryLobby
-	}
-
 	public static void setCurrentLobby(HypixelLobbies lobby) {
 		resetLobby(currentLobby);
 		currentLobby = lobby;
@@ -145,10 +144,7 @@ public class MMHelper implements ClientModInitializer {
 	}
 
 	public static boolean isPlayerInTabList(GameProfile profile) {
-		// ids of players are sometimes different from this player list
-		// DOESN'T WORK: return MinecraftClient.getInstance().player.networkHandler.getPlayerUuids().contains(player.getGameProfile().getId());
-
-		// but using names works:
+		// ids of players are sometimes different from this player list but using names works
 		if (MinecraftClient.getInstance().player != null) {
 			String name = profile.getName();
 			for (PlayerListEntry entry : MinecraftClient.getInstance().player.networkHandler.getPlayerList()) {
