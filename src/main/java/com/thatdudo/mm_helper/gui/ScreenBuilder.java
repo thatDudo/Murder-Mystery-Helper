@@ -89,6 +89,13 @@ public class ScreenBuilder {
                 .setSaveConsumer(config.murdermystery::setHighlightSpectators)
                 .build();
 
+        // check for updates
+        AbstractConfigListEntry<Boolean> toggleCheckForUpdates = entryBuilder.startBooleanToggle(new TranslatableText("config.generic.hypixel.murder_mystery.misc.check_for_updates.title"), config.checkForUpdates)
+                .setDefaultValue(defaults.checkForUpdates)
+//                .setTooltip(new TranslatableText("config.generic.hypixel.murder_mystery.misc.check_for_updates.tooltip"))
+                .setSaveConsumer(MMHelper::setCheckForUpdates)
+                .build();
+
 
         SubCategoryBuilder subCatHighlight = entryBuilder.startSubCategory(new TranslatableText("config.generic.hypixel.murder_mystery.highlight.title"));
         subCatHighlight.add(enumMurderMysteryInnocentHighlightOptions);
@@ -101,6 +108,7 @@ public class ScreenBuilder {
         SubCategoryBuilder subCatMisc = entryBuilder.startSubCategory(new TranslatableText("config.generic.hypixel.murder_mystery.misc.title"));
         subCatMisc.add(toggleMurderMysteryShowNameTags);
         subCatMisc.add(toggleMurderMysteryHighlightSpectators);
+        subCatMisc.add(toggleCheckForUpdates);
         subCatMisc.setExpanded(true);
 
         catGeneric.addEntry(toggleEnabled);

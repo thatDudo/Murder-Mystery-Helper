@@ -11,6 +11,8 @@ import java.util.UUID;
 public class Config {
     @Expose public boolean enabled = true;
     @Expose public MurderMystery murdermystery = new MurderMystery();
+    @Expose public boolean checkForUpdates = true;
+    @Expose public boolean hasShownUpdateNotification = false;
 
     public static final class MurderMystery {
         @Expose public boolean highlightMurders = true;

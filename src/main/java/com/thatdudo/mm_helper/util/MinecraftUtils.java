@@ -1,8 +1,12 @@
 package com.thatdudo.mm_helper.util;
 
 import com.mojang.authlib.GameProfile;
+import net.fabricmc.loader.api.FabricLoader;
+import net.fabricmc.loader.api.ModContainer;
+import net.fabricmc.loader.api.metadata.ModMetadata;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.PlayerListEntry;
+import net.minecraft.client.toast.SystemToast;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
 
@@ -11,6 +15,10 @@ public class MinecraftUtils {
         if (MinecraftClient.getInstance() != null && MinecraftClient.getInstance().inGameHud != null) {
             MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(msg);
         }
+    }
+
+    public static void showToast(Text title, Text description) {
+        MinecraftClient.getInstance().getToastManager().add(new SystemToast(SystemToast.Type.TUTORIAL_HINT, title, description));
     }
 
     public static boolean isPlayerInTabList(PlayerEntity player) {
@@ -28,5 +36,10 @@ public class MinecraftUtils {
             }
         }
         return false;
+    }
+
+    public static ModMetadata getModMetadata(String modId) {
+        ModContainer container = FabricLoader.getInstance().getModContainer(modId).get();
+        return container.getMetadata();
     }
 }

@@ -3,6 +3,7 @@ package com.thatdudo.mm_helper.config;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.thatdudo.mm_helper.MMHelper;
+import com.thatdudo.mm_helper.util.ModProperties;
 import net.fabricmc.loader.api.FabricLoader;
 import org.apache.commons.io.FileUtils;
 
@@ -27,7 +28,7 @@ public class ConfigManager {
             return;
         }
 
-        configFile = new File(FabricLoader.getInstance().getConfigDir().toFile(), MMHelper.MOD_ID +".json");
+        configFile = new File(FabricLoader.getInstance().getConfigDir().toFile(), ModProperties.MOD_ID +".json");
         readConfig(false);
 
         initialized = true;

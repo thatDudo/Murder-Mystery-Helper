@@ -3,13 +3,17 @@ package com.thatdudo.mm_helper;
 import com.thatdudo.mm_helper.config.Config;
 import com.thatdudo.mm_helper.config.ConfigManager;
 import com.thatdudo.mm_helper.gui.ScreenBuilder;
-import com.thatdudo.mm_helper.util.MurderItemsFetcher;
+import com.thatdudo.mm_helper.util.GithubFetcher;
+import com.thatdudo.mm_helper.util.ModProperties;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
+import net.minecraft.client.toast.SystemToast;
+import net.minecraft.client.toast.Toast;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import org.lwjgl.glfw.GLFW;
@@ -20,9 +24,6 @@ import java.util.UUID;
 public class MMHelper implements ClientModInitializer {
 	private static KeyBinding keyBindingOpenSettings;
 	private static KeyBinding keyToggleEnabled;
-
-	public static final String MOD_ID = "mm_helper";
-	public static final String MOD_NAME = "Murder Mystery Helper";
 
 	public static boolean onHypixelServer = false;
 	public enum HypixelLobbies {
@@ -46,23 +47,29 @@ public class MMHelper implements ClientModInitializer {
 	public static ArrayList<UUID> markedMurders = new ArrayList<>();
 	public static ArrayList<UUID> markedDetectives = new ArrayList<>();
 
+	private static Toast nextToast;
+
 	@Override
 	public void onInitializeClient() {
 		ConfigManager.init();
-		MurderItemsFetcher.fetchAndUpdate();
+		checkForUpdates();
+		GithubFetcher.getMurderItems(items -> {
+			ConfigManager.getConfig().murdermystery.murderItems = items;
+			ConfigManager.writeConfig(true);
+		});
 
 		// adding keybindings to minecraft settings
 		keyBindingOpenSettings = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-				"key."+MOD_ID+".settings", // The translation key of the keybinding's name
+				"key."+ ModProperties.MOD_ID+".settings", // The translation key of the keybinding's name
 				InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
 				GLFW.GLFW_KEY_UNKNOWN, // The keycode of the key
-				"key.category."+MOD_ID // The translation key of the keybinding's category.
+				"key.category."+ModProperties.MOD_ID // The translation key of the keybinding's category.
 		));
 		keyToggleEnabled = KeyBindingHelper.registerKeyBinding(new KeyBinding(
-				"key."+MOD_ID+".enable", // The translation key of the keybinding's name
+				"key."+ModProperties.MOD_ID+".enable", // The translation key of the keybinding's name
 				InputUtil.Type.KEYSYM, // The type of the keybinding, KEYSYM for keyboard, MOUSE for mouse.
 				GLFW.GLFW_KEY_UNKNOWN, // The keycode of the key
-				"key.category."+MOD_ID // The translation key of the keybinding's category.
+				"key.category."+ModProperties.MOD_ID // The translation key of the keybinding's category.
 		));
 		ClientTickEvents.END_CLIENT_TICK.register(this::tick);
 	}
@@ -75,11 +82,11 @@ public class MMHelper implements ClientModInitializer {
 			if (client.player != null) {
 				if (isEnabled()) {
 					setModEnabled(false);
-					client.player.sendMessage(new TranslatableText("message.disabled", MOD_NAME).formatted(Formatting.RED), true);
+					client.player.sendMessage(new TranslatableText("message.disabled", ModProperties.MOD_NAME).formatted(Formatting.RED), true);
 				}
 				else {
 					setModEnabled(true);
-					client.player.sendMessage(new TranslatableText("message.enabled", MOD_NAME).formatted(Formatting.GREEN), true);
+					client.player.sendMessage(new TranslatableText("message.enabled", ModProperties.MOD_NAME).formatted(Formatting.GREEN), true);
 				}
 			}
 		}
@@ -115,6 +122,14 @@ public class MMHelper implements ClientModInitializer {
 	public static void setCurrentLobby(HypixelLobbies lobby) {
 		resetLobby(currentLobby);
 		currentLobby = lobby;
+		if (currentLobby == HypixelLobbies.MurderMysteryLobby || currentLobby == HypixelLobbies.MurderMystery) {
+			if (nextToast != null) {
+				MinecraftClient.getInstance().getToastManager().add(nextToast);
+				nextToast = null;
+				ConfigManager.getConfig().hasShownUpdateNotification = true;
+				ConfigManager.writeConfig(true);
+			}
+		}
 	}
 
 	/**
@@ -128,6 +143,29 @@ public class MMHelper implements ClientModInitializer {
 			clientIsDead = false;
 			markedMurders.clear();
 			markedDetectives.clear();
+		}
+	}
+
+	public static void checkForUpdates() {
+		GithubFetcher.checkForUpdate(version -> {
+			Toast toast = new SystemToast(SystemToast.Type.TUTORIAL_HINT, new TranslatableText("notification.update.title"),
+					new TranslatableText("notification.update.description", ModProperties.MOD_NAME));
+			if (isActive()) {
+				MinecraftClient.getInstance().getToastManager().add(toast);
+			}
+			else {
+				nextToast = toast;
+			}
+		});
+	}
+	public static void setCheckForUpdates(boolean doCheck) {
+		Config config = ConfigManager.getConfig();
+		if (config.checkForUpdates != doCheck) {
+			config.checkForUpdates = doCheck;
+			config.hasShownUpdateNotification = false;
+			if (doCheck) {
+				checkForUpdates();
+			}
 		}
 	}
 }

@@ -7,6 +7,9 @@
   "message.murder_mystery.murder_marked": "Found Murder: %s",
   "message.murder_mystery.starting_murder_mode": "Murder Help Activated",
 
+  "notification.update.title": "Update Available",
+  "notification.update.description": "Murder Mystery Helper can be updated to %s",
+
   "key.category.mm_helper": "Murder Mystery Helper",
   "key.mm_helper.enable": "Toggle Enabled",
   "key.mm_helper.settings": "Open Settings",
@@ -44,6 +47,8 @@
   "config.generic.hypixel.murder_mystery.misc.show_name_tags.tooltip": "Forces the client to render name tags",
   "config.generic.hypixel.murder_mystery.misc.highlight_spectators.title": "Highlight spectators",
   "config.generic.hypixel.murder_mystery.misc.highlight_spectators.tooltip": "After death other dead players will\nreappear as spectators.\n\nThis toggles if those should still\nget highlighted",
+  "config.generic.hypixel.murder_mystery.misc.check_for_updates.title": "Give update notifications",
+  "config.generic.hypixel.murder_mystery.misc.check_for_updates.tooltip": "",
 
   "config.generic.hypixel.murder_mystery.hide_death_banner.title": "Hide death banner",
   "config.generic.hypixel.murder_mystery.hide_death_banner.tooltip": "Hides the banner bestowed on you upon death",
