@@ -12,7 +12,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerInventory.class)
 public class PlayerInventoryMixin {
-
     @Inject(at = @At("HEAD"), method = "setStack")
     private void onSetStack(int slot, ItemStack stack, CallbackInfo info) {
         if (MMHelper.isActive() && !MMHelper.clientIsMurder) {

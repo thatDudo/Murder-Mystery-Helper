@@ -56,7 +56,7 @@ public class MMHelper implements ClientModInitializer {
 		}
 		GithubFetcher.getMurderItems(items -> {
 			ConfigManager.getConfig().murdermystery.murderItems = items;
-			ConfigManager.writeConfig(true);
+			ConfigManager.writeConfig();
 		});
 
 		// adding keybindings to minecraft settings
@@ -130,10 +130,6 @@ public class MMHelper implements ClientModInitializer {
 		}
 	}
 
-	/**
-	 * Reset configurations
-	 * @param lobby Lobby from which the config is to be reseted
-	 */
 	public static void resetLobby(HypixelLobbies lobby) {
 		if (lobby == HypixelLobbies.MurderMystery) {
 			roundHasEnded = false;
@@ -167,8 +163,8 @@ public class MMHelper implements ClientModInitializer {
 					new TranslatableText("notification.update.description", newAvailableVersion));
 			MinecraftClient.getInstance().getToastManager().add(toast);
 			ConfigManager.getConfig().hasShownUpdateNotification = true;
+			ConfigManager.writeConfig();
 		}
-		ConfigManager.writeConfig();
 	}
 
 	public static void setCheckForUpdates(boolean doCheck) {
