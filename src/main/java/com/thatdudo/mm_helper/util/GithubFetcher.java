@@ -32,9 +32,10 @@ public class GithubFetcher {
                     Version mcVersion = new Version(versions[1]);
                     if (mcVersion.equals(ModProperties.MC_VERSION) && ModProperties.MOD_VERSION.shouldUpdateTo(modVersion)) {
                         consumer.accept(modVersion.toString());
-                        break;
+                        return;
                     }
                 }
+                consumer.accept(null);
             }
         };
         executor.execute(runnable);

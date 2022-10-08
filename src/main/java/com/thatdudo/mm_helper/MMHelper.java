@@ -13,7 +13,6 @@ import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.toast.SystemToast;
 import net.minecraft.client.toast.Toast;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
 import org.lwjgl.glfw.GLFW;
@@ -47,12 +46,14 @@ public class MMHelper implements ClientModInitializer {
 	public static ArrayList<UUID> markedMurders = new ArrayList<>();
 	public static ArrayList<UUID> markedDetectives = new ArrayList<>();
 
-	private static Toast nextToast;
+	private static String newAvailableVersion;
 
 	@Override
 	public void onInitializeClient() {
 		ConfigManager.init();
-		checkForUpdates();
+		if (ConfigManager.getConfig().checkForUpdates) {
+			checkForUpdates();
+		}
 		GithubFetcher.getMurderItems(items -> {
 			ConfigManager.getConfig().murdermystery.murderItems = items;
 			ConfigManager.writeConfig(true);
@@ -122,12 +123,9 @@ public class MMHelper implements ClientModInitializer {
 	public static void setCurrentLobby(HypixelLobbies lobby) {
 		resetLobby(currentLobby);
 		currentLobby = lobby;
-		if (currentLobby == HypixelLobbies.MurderMysteryLobby || currentLobby == HypixelLobbies.MurderMystery) {
-			if (nextToast != null) {
-				MinecraftClient.getInstance().getToastManager().add(nextToast);
-				nextToast = null;
-				ConfigManager.getConfig().hasShownUpdateNotification = true;
-				ConfigManager.writeConfig(true);
+		if (isActive()) {
+			if (!ConfigManager.getConfig().hasShownUpdateNotification) {
+				showUpdateNotification();
 			}
 		}
 	}
@@ -147,17 +145,32 @@ public class MMHelper implements ClientModInitializer {
 	}
 
 	public static void checkForUpdates() {
-		GithubFetcher.checkForUpdate(version -> {
-			Toast toast = new SystemToast(SystemToast.Type.TUTORIAL_HINT, new TranslatableText("notification.update.title"),
-					new TranslatableText("notification.update.description", ModProperties.MOD_NAME));
-			if (isActive()) {
-				MinecraftClient.getInstance().getToastManager().add(toast);
-			}
-			else {
-				nextToast = toast;
-			}
-		});
+		if (newAvailableVersion == null) {
+			GithubFetcher.checkForUpdate(version -> {
+				newAvailableVersion = version;
+				if (newAvailableVersion != null) {
+					if (isActive()) {
+						showUpdateNotification();
+					}
+				}
+				else {
+					ConfigManager.getConfig().hasShownUpdateNotification = false;
+					ConfigManager.writeConfig();
+				}
+			});
+		}
 	}
+
+	public static void showUpdateNotification() {
+		if (newAvailableVersion != null) {
+			Toast toast = new SystemToast(SystemToast.Type.TUTORIAL_HINT, new TranslatableText("notification.update.title"),
+					new TranslatableText("notification.update.description", newAvailableVersion));
+			MinecraftClient.getInstance().getToastManager().add(toast);
+			ConfigManager.getConfig().hasShownUpdateNotification = true;
+		}
+		ConfigManager.writeConfig();
+	}
+
 	public static void setCheckForUpdates(boolean doCheck) {
 		Config config = ConfigManager.getConfig();
 		if (config.checkForUpdates != doCheck) {

@@ -17,10 +17,6 @@ public class MinecraftUtils {
         }
     }
 
-    public static void showToast(Text title, Text description) {
-        MinecraftClient.getInstance().getToastManager().add(new SystemToast(SystemToast.Type.TUTORIAL_HINT, title, description));
-    }
-
     public static boolean isPlayerInTabList(PlayerEntity player) {
         return isPlayerInTabList(player.getGameProfile());
     }

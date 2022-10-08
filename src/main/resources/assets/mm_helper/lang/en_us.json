@@ -7,8 +7,8 @@
   "message.murder_mystery.murder_marked": "Found Murder: %s",
   "message.murder_mystery.starting_murder_mode": "Murder Help Activated",
 
-  "notification.update.title": "Update Available",
-  "notification.update.description": "Murder Mystery Helper can be updated to %s",
+  "notification.update.title": "Murder Mystery Helper",
+  "notification.update.description": "A new version is available: %s",
 
   "key.category.mm_helper": "Murder Mystery Helper",
   "key.mm_helper.enable": "Toggle Enabled",

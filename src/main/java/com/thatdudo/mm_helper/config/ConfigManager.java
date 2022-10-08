@@ -66,6 +66,10 @@ public class ConfigManager {
         writeConfig(false);
     }
 
+    public static void writeConfig() {
+        writeConfig(true);
+    }
+
     public static void writeConfig(boolean async) {
         Runnable task = () -> {
             try {
