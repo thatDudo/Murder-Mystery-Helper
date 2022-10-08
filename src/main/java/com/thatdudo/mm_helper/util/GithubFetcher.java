@@ -28,6 +28,9 @@ public class GithubFetcher {
             if (releases != null){
                 for (GithubRelease release : releases) {
                     String[] versions = release.tag_name.split("\\+");
+                    if (versions.length != 2) {
+                        continue;
+                    }
                     Version modVersion = new Version(versions[0]);
                     Version mcVersion = new Version(versions[1]);
                     if (mcVersion.equals(ModProperties.MC_VERSION) && ModProperties.MOD_VERSION.shouldUpdateTo(modVersion)) {

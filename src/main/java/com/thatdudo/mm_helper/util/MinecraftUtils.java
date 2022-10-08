@@ -6,14 +6,22 @@ import net.fabricmc.loader.api.ModContainer;
 import net.fabricmc.loader.api.metadata.ModMetadata;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.PlayerListEntry;
+import net.minecraft.client.toast.SystemToast;
+import net.minecraft.client.toast.Toast;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
 
 public class MinecraftUtils {
     public static void printChatMsg(Text msg) {
         if (MinecraftClient.getInstance() != null && MinecraftClient.getInstance().inGameHud != null) {
             MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(msg);
         }
+    }
+
+    public static void showToast(Text title, Text description) {
+        Toast toast = new SystemToast(SystemToast.Type.TUTORIAL_HINT, title, description);
+        MinecraftClient.getInstance().getToastManager().add(toast);
     }
 
     public static boolean isPlayerInTabList(PlayerEntity player) {

@@ -4,6 +4,7 @@ import com.thatdudo.mm_helper.config.Config;
 import com.thatdudo.mm_helper.config.ConfigManager;
 import com.thatdudo.mm_helper.gui.ScreenBuilder;
 import com.thatdudo.mm_helper.util.GithubFetcher;
+import com.thatdudo.mm_helper.util.MinecraftUtils;
 import com.thatdudo.mm_helper.util.ModProperties;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -159,9 +160,8 @@ public class MMHelper implements ClientModInitializer {
 
 	public static void showUpdateNotification() {
 		if (newAvailableVersion != null) {
-			Toast toast = new SystemToast(SystemToast.Type.TUTORIAL_HINT, new TranslatableText("notification.update.title"),
+			MinecraftUtils.showToast(new TranslatableText("notification.update.title"),
 					new TranslatableText("notification.update.description", newAvailableVersion));
-			MinecraftClient.getInstance().getToastManager().add(toast);
 			ConfigManager.getConfig().hasShownUpdateNotification = true;
 			ConfigManager.writeConfig();
 		}
