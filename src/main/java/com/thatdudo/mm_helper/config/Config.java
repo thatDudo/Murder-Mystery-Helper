@@ -16,11 +16,11 @@ public class Config {
 
     public static final class MurderMystery {
         @Expose public boolean highlightMurders = true;
-        @Expose public InnocentHighlightOptions innocentHighlightOptions = InnocentHighlightOptions.AS_MURDER;
+        @Expose public InnocentHighlightOptions innocentHighlightOptions = InnocentHighlightOptions.ALWAYS;
         @Expose public DetectiveHighlightOptions detectiveHighlightOptions = DetectiveHighlightOptions.ALWAYS;
         @Expose public boolean highlightGold = true;
         @Expose public boolean highlightBows = true;
-        @Expose public boolean showNameTags = false;
+        @Expose public boolean showNameTags = true;
         @Expose public boolean highlightSpectators = false;
         @Expose public ArrayList<Integer> murderItems = getDefaultMurderItemsIds();
 
