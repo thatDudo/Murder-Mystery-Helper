@@ -5,7 +5,7 @@ A fabric mod for Hypixels Murder Mystery that does the detective work for you.
 When playing on the server it will identify the murders through searching for a murder weapon in their hand.
 After identification the mod will highlight the murders with a red glow and print a chat message *that is only visible to you*.
 
-Please note that *Optifine* shaders interfere with the minecraft glow effect, so instead using *Iris* is preferable.
+Please note that *Optifine* shaders interfere with the minecraft glow effect, so using *Iris* is preferable.
 
 This mod is not detectable but you should not consistently write the murders name to chat to avoid suspicions.
 
