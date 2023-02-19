@@ -13,7 +13,7 @@ public class ClientPlayNetworkHandlerMixin {
 
     @Inject(at = @At("RETURN"), method = "onPlayerAbilities")
     private void onOnPlayerAbilities(PlayerAbilitiesS2CPacket packet, CallbackInfo info) {
-        if (MMHelper.isActive()) {
+        if (MMHelper.isMurderMysteryActive()) {
             MMHelper.clientIsDead = packet.allowFlying();
         }
     }

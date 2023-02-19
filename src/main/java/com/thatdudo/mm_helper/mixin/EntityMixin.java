@@ -2,8 +2,6 @@ package com.thatdudo.mm_helper.mixin;
 
 import com.thatdudo.mm_helper.MMHelper;
 import com.thatdudo.mm_helper.access.EntityMixinAccess;
-import com.thatdudo.mm_helper.config.Config;
-import com.thatdudo.mm_helper.config.ConfigManager;
 import net.minecraft.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
@@ -24,7 +22,7 @@ public abstract class EntityMixin implements EntityMixinAccess {
 
     @Inject(at = @At("HEAD"), method = "getTeamColorValue", cancellable = true)
     private void onGetTeamColorValue(CallbackInfoReturnable<Integer> info) {
-        if (MMHelper.isActive()) {
+        if (MMHelper.isMurderMysteryActive()) {
             if (glowColor >= 0) {
                 info.setReturnValue(glowColor);
             }

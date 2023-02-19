@@ -13,6 +13,10 @@ import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 
 public class MinecraftUtils {
+    public static void printChatMsg(String msg) {
+        printChatMsg(Text.of(msg));
+    }
+
     public static void printChatMsg(Text msg) {
         if (MinecraftClient.getInstance() != null && MinecraftClient.getInstance().inGameHud != null) {
             MinecraftClient.getInstance().inGameHud.getChatHud().addMessage(msg);

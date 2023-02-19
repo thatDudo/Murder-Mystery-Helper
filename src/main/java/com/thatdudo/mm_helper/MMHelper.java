@@ -11,8 +11,6 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
-import net.minecraft.client.toast.SystemToast;
-import net.minecraft.client.toast.Toast;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.Formatting;
@@ -29,7 +27,10 @@ public class MMHelper implements ClientModInitializer {
 	public enum HypixelLobbies {
 		None,
 		MurderMystery,
-		MurderMysteryLobby
+		MurderMysteryLobby,
+
+		BedWars,
+		BedWarsLobby,
 	}
 	public static HypixelLobbies currentLobby = HypixelLobbies.None;
 	public static boolean roundHasEnded = false;
@@ -39,7 +40,17 @@ public class MMHelper implements ClientModInitializer {
 	}
 
 	public static boolean isActive() {
+		return isEnabled() &&
+				(currentLobby == HypixelLobbies.MurderMystery ||
+						currentLobby == HypixelLobbies.BedWars);
+	}
+
+	public static boolean isMurderMysteryActive() {
 		return isEnabled() && currentLobby == HypixelLobbies.MurderMystery;
+	}
+
+	public static boolean isBedWarsActive() {
+		return isEnabled() && currentLobby == HypixelLobbies.BedWars;
 	}
 
 	public static boolean clientIsMurder = false;
@@ -122,9 +133,12 @@ public class MMHelper implements ClientModInitializer {
 	}
 
 	public static void setCurrentLobby(HypixelLobbies lobby) {
+		if (lobby == currentLobby) {
+			return;
+		}
 		resetLobby(currentLobby);
 		currentLobby = lobby;
-		if (isActive()) {
+		if (isMurderMysteryActive()) {
 			if (!ConfigManager.getConfig().hasShownUpdateNotification) {
 				showUpdateNotification();
 			}
@@ -146,7 +160,7 @@ public class MMHelper implements ClientModInitializer {
 			GithubFetcher.checkForUpdate(version -> {
 				newAvailableVersion = version;
 				if (newAvailableVersion != null) {
-					if (isActive()) {
+					if (isMurderMysteryActive()) {
 						showUpdateNotification();
 					}
 				}

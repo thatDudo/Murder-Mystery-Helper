@@ -1,7 +1,6 @@
 package com.thatdudo.mm_helper.mixin;
 
 import com.thatdudo.mm_helper.MMHelper;
-import com.thatdudo.mm_helper.config.Config;
 import com.thatdudo.mm_helper.config.ConfigManager;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
@@ -14,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class PlayerInventoryMixin {
     @Inject(at = @At("HEAD"), method = "setStack")
     private void onSetStack(int slot, ItemStack stack, CallbackInfo info) {
-        if (MMHelper.isActive() && !MMHelper.clientIsMurder) {
+        if (MMHelper.isMurderMysteryActive() && !MMHelper.clientIsMurder) {
             if (stack.hasCustomName()) {
                 if (ConfigManager.getConfig().murdermystery.isMurderItem(stack.getItem())) {
                     MMHelper.clientIsMurder = true;

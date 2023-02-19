@@ -81,7 +81,7 @@ public abstract class PlayerEntityMixin implements PlayerEntityMixinAccess {
 
     @Inject(at = @At("RETURN"), method = "getEquippedStack")
     private void onEquip(EquipmentSlot slot, CallbackInfoReturnable<ItemStack> info) {
-        if (MMHelper.isActive() && !MMHelper.roundHasEnded) {
+        if (MMHelper.isMurderMysteryActive() && !MMHelper.roundHasEnded) {
             if (!isMurder() && isRealPlayer()) {
                 Item heldItem = info.getReturnValue().getItem();
                 if (!hasBow() && (heldItem == Items.BOW || heldItem == Items.ARROW)) {

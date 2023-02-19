@@ -11,6 +11,7 @@ import java.util.UUID;
 public class Config {
     @Expose public boolean enabled = true;
     @Expose public MurderMystery murdermystery = new MurderMystery();
+    @Expose public BedWars bedwars = new BedWars();
     @Expose public boolean checkForUpdates = true;
     @Expose public boolean hasShownUpdateNotification = false;
 
@@ -147,6 +148,18 @@ public class Config {
             }
             return ids;
         }
+    }
+
+    public static final class BedWars {
+        @Expose public boolean highlightEnemies = true;
+        @Expose public boolean highlightAllies = true;
+
+        public static final int enemyTeamColorValue = 0xFF1111;
+        public static final int allyTeamColorValue = 0x15BFD6;
+        public static final int ironTeamColorValue = 0xA19D94;
+        public static final int goldTeamColorValue = 0xFFF126;
+        public static final int emeraldTeamColorValue = 0x66CC66;
+        public static final int diamondTeamColorValue = 0xB9F2FF;
     }
 
     /**

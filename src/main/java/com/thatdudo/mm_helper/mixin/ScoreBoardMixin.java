@@ -3,6 +3,7 @@ package com.thatdudo.mm_helper.mixin;
 import com.thatdudo.mm_helper.MMHelper;
 import com.thatdudo.mm_helper.config.Config;
 import com.thatdudo.mm_helper.config.ConfigManager;
+import com.thatdudo.mm_helper.util.MinecraftUtils;
 import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.scoreboard.ScoreboardCriterion;
 import net.minecraft.scoreboard.ScoreboardObjective;
@@ -23,8 +24,16 @@ public class ScoreBoardMixin {
                 if (name.equalsIgnoreCase("prescoreboard") || name.equalsIgnoreCase("mmlobby")) {
                     MMHelper.setCurrentLobby(MMHelper.HypixelLobbies.MurderMysteryLobby);
                 }
-                else if (MMHelper.currentLobby != MMHelper.HypixelLobbies.MurderMystery && name.equalsIgnoreCase("murdermystery")) {
+                else if (name.equalsIgnoreCase("murdermystery")) {
                     MMHelper.setCurrentLobby(MMHelper.HypixelLobbies.MurderMystery);
+                }
+            }
+            else if (displayNameString.equalsIgnoreCase("bed wars")) {
+                if (name.equalsIgnoreCase("prescoreboard")) {
+                    MMHelper.setCurrentLobby(MMHelper.HypixelLobbies.BedWarsLobby);
+                }
+                else if (name.equalsIgnoreCase("bforeboard")) {
+                    MMHelper.setCurrentLobby(MMHelper.HypixelLobbies.BedWars);
                 }
             }
         }
