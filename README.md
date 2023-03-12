@@ -7,7 +7,7 @@ After identification the mod will highlight the murders with a red glow and prin
 
 Please note that *Optifine* shaders interfere with the minecraft glow effect, so using *Iris* is preferable.
 
-This mod is not detectable but you should not consistently write the murders name to chat to avoid suspicions.
+This mod is not detectable but you should obviously not consistently write the murders name to chat.
 
 ###### This mod runs on Fabric and requires the Fabric API: [How to install](https://fabricmc.net/ "How to install")
 
