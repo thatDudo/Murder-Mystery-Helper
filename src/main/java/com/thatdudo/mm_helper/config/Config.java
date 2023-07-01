@@ -132,12 +132,12 @@ public class Config {
         public static final int bowTeamColorValue = 0x21E808;
 
         public static final ArrayList<Item> DEFAULT_MURDER_ITEMS = new ArrayList<>(Arrays.asList(
-                Items.IRON_SWORD, Items.ENDER_CHEST, Items.COOKED_CHICKEN, Items.BONE, Items.BLAZE_ROD, Items.NETHER_BRICK, Items.CARROT_ON_A_STICK,
-                Items.STONE_SWORD, Items.SPONGE, Items.DEAD_BUSH, Items.OAK_BOAT, Items.GLISTERING_MELON_SLICE, Items.GOLDEN_PICKAXE,
-                Items.COOKED_BEEF, Items.BOOK, Items.APPLE, Items.PRISMARINE_SHARD, Items.QUARTZ, Items.DIAMOND_SWORD, Items.NAME_TAG,
-                Items.DIAMOND_SHOVEL, Items.ROSE_BUSH, Items.PUMPKIN_PIE, Items.DIAMOND_HOE, Items.CARROT, Items.RED_DYE, Items.SALMON,
-                Items.SHEARS, Items.IRON_SHOVEL, Items.GOLDEN_CARROT, Items.WOODEN_SWORD, Items.STICK, Items.STONE_SHOVEL, Items.COOKIE,
-                Items.DIAMOND_AXE, Items.GOLDEN_SWORD, Items.WOODEN_AXE
+                Items.IRON_SWORD, Items.ENDER_CHEST, Items.BOOK, Items.GLISTERING_MELON_SLICE, Items.OAK_BOAT, Items.RED_DYE, Items.SALMON,
+                Items.SHEARS, Items.DIAMOND_HOE, Items.DIAMOND_SWORD, Items.GOLDEN_SWORD, Items.GOLDEN_HOE, Items.COOKED_CHICKEN,
+                Items.NETHER_BRICK, Items.COOKED_BEEF, Items.PRISMARINE_SHARD, Items.ROSE_BUSH, Items.DIAMOND_AXE, Items.COOKIE, Items.GOLDEN_CARROT,
+                Items.CARROT, Items.BONE, Items.CARROT_ON_A_STICK, Items.SPONGE, Items.NAME_TAG, Items.APPLE, Items.GOLDEN_PICKAXE,
+                Items.PUMPKIN_PIE, Items.QUARTZ, Items.DIAMOND_SHOVEL, Items.BLAZE_ROD, Items.STONE_SHOVEL, Items.DEAD_BUSH, Items.WOODEN_SWORD,
+                Items.WOODEN_AXE, Items.STICK, Items.IRON_SHOVEL, Items.STONE_SWORD
         ));
 
         public ArrayList<Integer> getDefaultMurderItemsIds() {
